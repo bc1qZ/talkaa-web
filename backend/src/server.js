@@ -9,11 +9,11 @@ import { evaluateWithOpenAI } from "./adapters/openaiAdapter.js";
 import { buildFallbackEvaluation } from "./lib/fallbackEvaluation.js";
 
 const app = express();
-const upload = multer({ dest: path.resolve("backend/.tmp") });
+const upload = multer({ dest: path.resolve(".tmp") });
 const port = Number(process.env.PORT || 8787);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const webRoot = path.resolve(__dirname, "../../..");
+const webRoot = path.resolve(__dirname, "../..");
 
 app.use(cors());
 app.use(express.json());
@@ -82,6 +82,14 @@ app.post("/api/evaluate-speaking", upload.single("audio"), async (req, res) => {
 });
 
 app.get("/", (_req, res) => {
+  res.sendFile(path.join(webRoot, "index.html"));
+});
+
+app.get("*", (req, res, next) => {
+  if (req.path.startsWith("/api/")) {
+    next();
+    return;
+  }
   res.sendFile(path.join(webRoot, "index.html"));
 });
 
