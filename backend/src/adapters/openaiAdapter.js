@@ -78,7 +78,7 @@ export async function evaluateWithOpenAI({ audioPath, set, question, transcriptH
   };
 }
 
-export async function synthesizeSpeechWithOpenAI({ text, instructions = "", voice = "coral" }) {
+export async function synthesizeSpeechWithOpenAI({ text, instructions = "", voice = "marin" }) {
   const apiKey = requireEnv("OPENAI_API_KEY");
   const model = process.env.OPENAI_TTS_MODEL || "gpt-4o-mini-tts";
 

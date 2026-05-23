@@ -33,7 +33,7 @@ app.get("/api/question-bank", async (_req, res) => {
 app.post("/api/tts", async (req, res) => {
   const text = String(req.body?.text || "").trim();
   const instructions = String(req.body?.instructions || "").trim();
-  const voice = String(req.body?.voice || "coral").trim();
+  const voice = String(req.body?.voice || "marin").trim();
 
   if (!text) {
     res.status(400).json({ message: "Text is required" });

@@ -613,6 +613,7 @@ function renderHomeTabContent(dashboard, topErrors) {
 
         <div class="question-category-tabs">
           <button class="question-category-tab ${state.questionCategoryFilter === "all" ? "active" : ""}" type="button" data-question-category="all">全标签</button>
+          <button class="question-category-tab ${state.questionCategoryFilter === "practiced" ? "active" : ""}" type="button" data-question-category="practiced">已练过</button>
           ${categories
             .map(
               (category) => `
@@ -893,7 +894,13 @@ function getFilteredQuestionSets() {
     if (state.questionPartFilter !== "all" && set.part !== state.questionPartFilter) {
       return false;
     }
+    if (state.questionCategoryFilter === "practiced" && getPracticeCount(set.id) === 0) {
+      return false;
+    }
     if (state.questionCategoryFilter !== "all" && getQuestionTopicGroup(set) !== state.questionCategoryFilter) {
+      if (state.questionCategoryFilter === "practiced") {
+        return true;
+      }
       return false;
     }
     if (state.questionSearch.trim()) {
@@ -1884,7 +1891,7 @@ async function speakWithServerTTS(text, instructions) {
     body: JSON.stringify({
       text,
       instructions,
-      voice: "coral"
+      voice: "marin"
     })
   });
 
@@ -1907,7 +1914,7 @@ async function speakWithServerTTS(text, instructions) {
 
 function buildTtsInstructions(lang) {
   if (lang.startsWith("en")) {
-    return "Speak naturally like a calm IELTS speaking coach. Use clear pacing, light emphasis, and warm but realistic intonation.";
+    return "Speak naturally like a calm IELTS speaking coach. Use warm, realistic intonation, slightly varied rhythm, clean sentence endings, and natural pauses. Avoid sounding robotic or overly dramatic.";
   }
   return "Speak clearly, naturally, and at a moderate pace.";
 }
