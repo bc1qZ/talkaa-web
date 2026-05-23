@@ -1,0 +1,52 @@
+<view class="safe-page" wx:if="{{result}}">
+  <view class="status">
+    <text bindtap="goBack">‹ 返回</text>
+    <text></text>
+    <view class="ghost-btn">✕</view>
+  </view>
+
+  <view class="hero-band">
+    <view class="muted">{{result.reportDate}} {{result.part}}</view>
+    <view class="overall">OVERALL BAND</view>
+    <view class="band">{{result.overallBand}}</view>
+  </view>
+
+  <view class="metric-grid">
+    <view class="metric-card">
+      <view class="metric-top"><text>流利度</text><text>{{result.scores.fluency}}</text></view>
+      <view class="metric-bar"><view class="metric-fill green" style="width: {{result.scores.fluency / 9 * 100}}%;"></view></view>
+    </view>
+    <view class="metric-card">
+      <view class="metric-top"><text>发音</text><text>{{result.scores.pronunciation}}</text></view>
+      <view class="metric-bar"><view class="metric-fill orange" style="width: {{result.scores.pronunciation / 9 * 100}}%;"></view></view>
+    </view>
+    <view class="metric-card">
+      <view class="metric-top"><text>词汇</text><text>{{result.scores.vocabulary}}</text></view>
+      <view class="metric-bar"><view class="metric-fill purple" style="width: {{result.scores.vocabulary / 9 * 100}}%;"></view></view>
+    </view>
+    <view class="metric-card">
+      <view class="metric-top"><text>语法</text><text>{{result.scores.grammar}}</text></view>
+      <view class="metric-bar"><view class="metric-fill teal" style="width: {{result.scores.grammar / 9 * 100}}%;"></view></view>
+    </view>
+  </view>
+
+  <view class="panel section-card">
+    <view class="section-title">8 分以上标准差距</view>
+    <block wx:for="{{result.band8Targets}}" wx:key="title">
+      <view class="gap-item">
+        <view class="gap-title">{{item.title}}</view>
+        <view class="gap-body">{{item.body}}</view>
+      </view>
+    </block>
+  </view>
+
+  <view class="panel section-card">
+    <view class="section-title">润色后的回答</view>
+    <view class="response-box">{{result.polishedAnswer}}</view>
+  </view>
+
+  <view class="action-row">
+    <button class="outline-btn">上一题</button>
+    <button class="outline-btn dark" bindtap="nextQuestion">下一题</button>
+  </view>
+</view>

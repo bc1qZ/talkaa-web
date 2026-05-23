@@ -1,0 +1,104 @@
+.topic-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 48rpx;
+}
+
+.title-zh {
+  font-size: 70rpx;
+  font-weight: 800;
+}
+
+.title-en {
+  color: #8d867d;
+  font-size: 34rpx;
+  margin-top: 12rpx;
+}
+
+.part-badge {
+  padding: 16rpx 24rpx;
+  background: #fdeceb;
+  color: #bf5a49;
+  border-radius: 18rpx;
+  font-size: 32rpx;
+  font-weight: 700;
+}
+
+.cue-title {
+  margin-top: 64rpx;
+  font-size: 34rpx;
+}
+
+.cue-card {
+  margin-top: 24rpx;
+}
+
+.cue-item {
+  font-size: 38rpx;
+  line-height: 1.7;
+  margin-bottom: 18rpx;
+}
+
+.list-panel {
+  margin-top: 40rpx;
+  padding: 0 24rpx;
+}
+
+.question-item {
+  display: flex;
+  gap: 18rpx;
+  padding: 30rpx 0;
+  border-bottom: 2rpx solid #eee7dc;
+}
+
+.question-item:last-child {
+  border-bottom: 0;
+}
+
+.question-index {
+  color: #d8604c;
+  font-size: 42rpx;
+  font-weight: 700;
+}
+
+.question-copy {
+  flex: 1;
+}
+
+.question-text {
+  font-size: 42rpx;
+  line-height: 1.5;
+}
+
+.question-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16rpx;
+  margin-top: 24rpx;
+}
+
+.mini-btn {
+  border-radius: 999rpx;
+  border: 2rpx solid #f0b8b0;
+  background: #fff0ef;
+  color: #cf5c49;
+  font-size: 28rpx;
+  padding: 10rpx 18rpx;
+}
+
+.helper-note {
+  margin-top: 32rpx;
+  background: rgba(91, 155, 114, 0.12);
+  color: #315843;
+  border-radius: 24rpx;
+  padding: 24rpx;
+  line-height: 1.7;
+}
+
+.bottom-sticky {
+  position: fixed;
+  left: 32rpx;
+  right: 32rpx;
+  bottom: 32rpx;
+}

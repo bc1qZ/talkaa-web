@@ -1,0 +1,48 @@
+<view class="safe-page" wx:if="{{topic}}">
+  <view class="status">
+    <text bindtap="goBack">‹ 返回</text>
+    <text></text>
+  </view>
+
+  <view class="topic-head">
+    <view>
+      <view class="title-zh">{{topic.titleZh}}</view>
+      <view class="title-en">{{topic.titleEn}}</view>
+    </view>
+    <view class="part-badge">{{topic.part}}</view>
+  </view>
+
+  <block wx:if="{{topic.cueCard}}">
+    <view class="cue-title muted">You should say:</view>
+    <view class="cue-card">
+      <block wx:for="{{topic.cueCard}}" wx:key="*this">
+        <view class="cue-item">• {{item}}</view>
+      </block>
+    </view>
+  </block>
+
+  <block wx:else>
+    <view class="panel list-panel">
+      <block wx:for="{{topic.questions}}" wx:key="*this">
+        <view class="question-item">
+          <view class="question-index">{{index + 1}}</view>
+          <view class="question-copy">
+            <view class="question-text">{{item}}</view>
+            <view class="question-actions">
+              <button class="mini-btn" bindtap="showSample">教我回答</button>
+              <button class="mini-btn">定制答案</button>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </block>
+
+  <view class="helper-note">
+    这套小程序会把录音提交到后端做真实评分，点评标准会按 IELTS 8 分以上目标来压。
+  </view>
+
+  <view class="bottom-sticky">
+    <button class="primary-btn" bindtap="startPractice">开始练习</button>
+  </view>
+</view>

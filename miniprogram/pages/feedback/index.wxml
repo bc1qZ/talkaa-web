@@ -1,0 +1,39 @@
+<view class="safe-page" wx:if="{{result}}">
+  <view class="status">
+    <text bindtap="goBack">‹ 返回</text>
+    <text>{{result.part}}</text>
+    <view class="ghost-btn">Eric</view>
+  </view>
+
+  <view class="panel prompt-card">
+    <view class="prompt-title">{{result.question}}</view>
+  </view>
+
+  <view class="bubble-wrap">
+    <view class="answer-bubble">{{result.transcript}}</view>
+  </view>
+
+  <view class="score-line">🎯 Score: {{result.overallBand}}</view>
+  <view class="summary">{{result.summary}}</view>
+
+  <view class="analysis-wrap">
+    <view class="analysis-title">💡 点评与建议</view>
+    <block wx:for="{{result.briefFeedback}}" wx:key="title">
+      <view class="analysis-item">
+        <view class="analysis-name">• {{item.title}}</view>
+        <view class="analysis-text">{{item.body}}</view>
+      </view>
+    </block>
+  </view>
+
+  <view class="panel polish-card">
+    <view class="analysis-title">✨ 润色后的回答</view>
+    <view class="polish-copy">{{result.polishedAnswer}}</view>
+    <button class="ghost-btn" bindtap="copyPolished">复制润色答案</button>
+  </view>
+
+  <view class="action-row bottom-gap">
+    <button class="outline-btn" bindtap="retry">重新挑战</button>
+    <button class="outline-btn dark" bindtap="openReport">查看完整报告</button>
+  </view>
+</view>

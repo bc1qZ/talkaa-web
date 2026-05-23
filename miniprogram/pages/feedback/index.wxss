@@ -1,0 +1,67 @@
+.bubble-wrap {
+  display: flex;
+  justify-content: flex-end;
+  margin: 26rpx 0;
+}
+
+.answer-bubble {
+  max-width: 82%;
+  background: #d8604c;
+  color: #fff;
+  border-radius: 28rpx 28rpx 10rpx 28rpx;
+  padding: 28rpx;
+  line-height: 1.6;
+  font-size: 40rpx;
+}
+
+.score-line {
+  color: #bc2633;
+  font-size: 52rpx;
+  font-weight: 800;
+  margin-bottom: 18rpx;
+}
+
+.summary {
+  font-size: 36rpx;
+  line-height: 1.6;
+}
+
+.analysis-wrap {
+  margin-top: 28rpx;
+}
+
+.analysis-title {
+  font-size: 38rpx;
+  font-weight: 800;
+  margin-bottom: 18rpx;
+}
+
+.analysis-item {
+  margin-bottom: 20rpx;
+}
+
+.analysis-name {
+  color: #c5473b;
+  font-weight: 700;
+  margin-bottom: 8rpx;
+}
+
+.analysis-text {
+  line-height: 1.7;
+  color: #3f3a34;
+}
+
+.polish-card {
+  margin-top: 24rpx;
+  padding: 28rpx;
+}
+
+.polish-copy {
+  line-height: 1.8;
+  font-size: 36rpx;
+  margin-bottom: 20rpx;
+}
+
+.bottom-gap {
+  margin-top: 24rpx;
+}

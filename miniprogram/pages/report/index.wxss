@@ -1,0 +1,88 @@
+.hero-band {
+  text-align: center;
+  margin: 10rpx 0 28rpx;
+}
+
+.overall {
+  margin-top: 22rpx;
+  color: #7a715f;
+  font-size: 34rpx;
+  font-family: Georgia, serif;
+  letter-spacing: 2rpx;
+}
+
+.band {
+  margin-top: 14rpx;
+  color: #a67b0b;
+  font-size: 128rpx;
+  font-weight: 700;
+  font-family: Georgia, serif;
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20rpx;
+}
+
+.metric-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.metric-top {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+}
+
+.metric-bar {
+  height: 12rpx;
+  background: #ebe8e2;
+  border-radius: 999rpx;
+  overflow: hidden;
+}
+
+.metric-fill {
+  height: 100%;
+  border-radius: 999rpx;
+}
+
+.green { background: #5b9b72; }
+.orange { background: #d58f56; }
+.purple { background: #7a6792; }
+.teal { background: #4f7f87; }
+
+.section-card {
+  margin-top: 28rpx;
+  padding: 28rpx;
+}
+
+.section-title {
+  font-size: 38rpx;
+  font-weight: 800;
+  margin-bottom: 18rpx;
+}
+
+.gap-item {
+  margin-bottom: 20rpx;
+}
+
+.gap-title {
+  color: #3e7f5d;
+  font-weight: 700;
+  margin-bottom: 8rpx;
+}
+
+.gap-body,
+.response-box {
+  line-height: 1.8;
+}
+
+.response-box {
+  border: 2rpx dashed #d7cec0;
+  border-radius: 22rpx;
+  padding: 22rpx;
+  background: #fffdfa;
+}

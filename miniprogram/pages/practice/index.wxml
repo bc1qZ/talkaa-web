@@ -1,0 +1,35 @@
+<view class="safe-page" wx:if="{{topic}}">
+  <view class="status">
+    <text bindtap="goBack">‹ 返回</text>
+    <text>{{topic.part}}</text>
+    <view class="ghost-btn">Eric</view>
+  </view>
+
+  <view class="progress-row">
+    <view class="progress-track">
+      <view class="progress-fill" style="width: {{progress}}%;"></view>
+    </view>
+    <text class="muted">{{questionIndex + 1}}/{{topic.questions.length}}</text>
+  </view>
+
+  <view class="panel prompt-card">
+    <view class="prompt-title">{{question}}</view>
+    <button class="play-btn" bindtap="playQuestion">▶ 播放题目</button>
+  </view>
+
+  <view class="record-panel">
+    <view class="record-track">
+      <view class="record-fill" style="width: {{(30 - timerLeft) / 30 * 100}}%;"></view>
+    </view>
+    <view class="timer-box">
+      <view class="muted">剩余时间</view>
+      <view class="timer-main">00:{{timerLeft < 10 ? '0' + timerLeft : timerLeft}}</view>
+      <view class="timer-sub">已录制 00:{{recordedSeconds < 10 ? '0' + recordedSeconds : recordedSeconds}}</view>
+    </view>
+    <view class="action-row">
+      <button class="outline-btn" bindtap="cancelRecord">取消</button>
+      <button class="outline-btn dark" wx:if="{{!isRecording}}" bindtap="startPracticeRecord">开始录音</button>
+      <button class="outline-btn dark" wx:else bindtap="stopAndEvaluate">发送评分</button>
+    </view>
+  </view>
+</view>

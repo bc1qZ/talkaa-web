@@ -1,0 +1,65 @@
+page {
+  background: linear-gradient(180deg, #fbf8f2 0%, #f4efe7 100%);
+  color: #23211f;
+  font-family: "PingFang SC", "Helvetica Neue", sans-serif;
+}
+
+.safe-page {
+  min-height: 100vh;
+  padding: 112rpx 32rpx 36rpx;
+  box-sizing: border-box;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 32rpx;
+  font-weight: 700;
+  margin-bottom: 28rpx;
+}
+
+.panel {
+  background: rgba(255, 253, 249, 0.96);
+  border-radius: 36rpx;
+  box-shadow: 0 18rpx 40rpx rgba(64, 43, 20, 0.08);
+  border: 2rpx solid rgba(80, 66, 48, 0.06);
+}
+
+.primary-btn {
+  width: 100%;
+  border-radius: 28rpx;
+  background: #252321;
+  color: #fff;
+  font-size: 34rpx;
+  font-weight: 700;
+  line-height: 104rpx;
+}
+
+.ghost-btn {
+  border-radius: 999rpx;
+  border: 2rpx solid #dfd6ca;
+  background: #fffdf8;
+  color: #605951;
+  font-size: 28rpx;
+  padding: 14rpx 24rpx;
+}
+
+.outline-btn {
+  border-radius: 24rpx;
+  border: 2rpx solid #dbd3c7;
+  background: #fffdf8;
+  color: #605951;
+  font-size: 32rpx;
+  line-height: 96rpx;
+}
+
+.outline-btn.dark {
+  background: #252321;
+  color: #fff;
+  border-color: #252321;
+}
+
+.muted {
+  color: #8d867d;
+}

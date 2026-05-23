@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: talkaa-web
+    runtime: docker
+    plan: free
+    autoDeploy: false
+    healthCheckPath: /health
+    envVars:
+      - key: PORT
+        value: 8787
+      - key: OPENAI_EVAL_MODEL
+        value: gpt-4o-mini-transcribe
+      - key: OPENAI_REPORT_MODEL
+        value: gpt-4.1
+      - key: OPENAI_API_KEY
+        sync: false

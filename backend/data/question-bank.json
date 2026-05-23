@@ -1,0 +1,36 @@
+{
+  "version": "2026-05-21",
+  "nextPlannedUpdate": "2026-06-01",
+  "sets": [
+    {
+      "id": "2026-05-part1-crowded-place",
+      "part": "Part 1",
+      "titleZh": "拥挤的地方",
+      "titleEn": "Crowded place",
+      "updatedAt": "2026-05-21",
+      "questions": [
+        "Is the city where you live crowded?",
+        "What places in your city are usually packed with people?",
+        "Do you enjoy busy places or quiet places more?",
+        "Why do some people like crowded places?",
+        "How can a city reduce traffic and crowding?"
+      ]
+    },
+    {
+      "id": "2026-05-part2-story-book-animals",
+      "part": "Part 2",
+      "titleZh": "包含动物的故事或书",
+      "titleEn": "Describe a story/book with animals in it",
+      "updatedAt": "2026-05-21",
+      "cueCard": [
+        "What animals are in it",
+        "What the story/book is about",
+        "Why you read the story/book",
+        "And explain what you think of this story/book"
+      ],
+      "questions": [
+        "Describe a story/book with animals in it"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+.progress-row {
+  display: flex;
+  align-items: center;
+  gap: 18rpx;
+  margin: 18rpx 0 28rpx;
+}
+
+.progress-track,
+.record-track {
+  flex: 1;
+  height: 12rpx;
+  border-radius: 999rpx;
+  background: #e7e4de;
+  overflow: hidden;
+}
+
+.progress-fill,
+.record-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #df402f, #eb724c);
+  border-radius: 999rpx;
+}
+
+.prompt-card {
+  padding: 32rpx;
+}
+
+.prompt-title {
+  font-size: 50rpx;
+  line-height: 1.4;
+  margin-bottom: 18rpx;
+}
+
+.play-btn {
+  padding: 0;
+  background: transparent;
+  color: #6e6660;
+  font-size: 30rpx;
+}
+
+.record-panel {
+  margin-top: 320rpx;
+}
+
+.timer-box {
+  text-align: center;
+  margin: 30rpx 0 36rpx;
+}
+
+.timer-main {
+  font-size: 88rpx;
+  font-weight: 800;
+  color: #df402f;
+  margin-top: 10rpx;
+}
+
+.timer-sub {
+  margin-top: 10rpx;
+  color: #8d867d;
+}
+
+.action-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18rpx;
+}

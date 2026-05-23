@@ -1,0 +1,54 @@
+<view class="safe-page">
+  <view class="status">
+    <text>09:33 ◐</text>
+    <text>5G 60</text>
+  </view>
+
+  <view class="calendar-title">{{todayText}}</view>
+  <view class="week-row muted">
+    <text>M</text><text>T</text><text>W</text><text>T</text><text>F</text><text>S</text><text>S</text>
+  </view>
+  <view class="date-row">
+    <text>18</text><text>19</text><text>20</text><text class="active-date">21</text><text>22</text><text>23</text><text>24</text>
+  </view>
+
+  <view class="hero">
+    <view>
+      <view class="hero-title">早上好！🎁</view>
+      <view class="muted">今日 1/3 项任务</view>
+    </view>
+    <view class="premium">Premium</view>
+  </view>
+
+  <view class="panel task-panel">
+    <block wx:for="{{tasks}}" wx:key="id">
+      <view class="task-row" data-id="{{item.id}}" bindtap="openTopic">
+        <view class="task-mark {{item.status === 'done' ? 'task-mark-done' : ''}}"></view>
+        <view class="task-copy">
+          <view class="task-badge">{{item.part}}</view>
+          <view class="task-title">{{item.titleEn}}</view>
+          <view class="task-subtitle">{{item.titleZh}}</view>
+        </view>
+        <view class="task-arrow">›</view>
+      </view>
+    </block>
+  </view>
+
+  <view class="feature-grid">
+    <view class="feature-card">
+      <text class="feature-icon">🎙️</text>
+      <text class="feature-cn">口语练习</text>
+      <text class="feature-en">Speaking</text>
+    </view>
+    <view class="feature-card">
+      <text class="feature-icon">⏱️</text>
+      <text class="feature-cn">全真模考</text>
+      <text class="feature-en">Mock Exam</text>
+    </view>
+    <view class="feature-card">
+      <text class="feature-icon">📚</text>
+      <text class="feature-cn">提分素材</text>
+      <text class="feature-en">Resources</text>
+    </view>
+  </view>
+</view>
