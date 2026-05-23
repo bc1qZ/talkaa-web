@@ -788,8 +788,10 @@ button {
 }
 
 .pill-row {
+  display: flex;
+  flex-wrap: wrap;
   gap: 10px;
-  justify-content: flex-end;
+  justify-content: flex-start;
   margin-top: 14px;
 }
 
@@ -800,6 +802,19 @@ button {
   border-radius: 999px;
   padding: 8px 14px;
   font-weight: 700;
+  font-size: 13px;
+}
+
+.tiny-btn.secondary {
+  background: #fffaf4;
+  border-color: #e2d2c3;
+  color: #6f6257;
+}
+
+.tiny-btn.dark {
+  background: #252321;
+  border-color: #252321;
+  color: #fff;
 }
 
 .start-fixed {

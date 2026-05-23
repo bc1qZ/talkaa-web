@@ -1024,6 +1024,8 @@ function renderDetailScreen() {
                         <div class="q-text">${question}</div>
                       </div>
                       <div class="pill-row">
+                        <button class="tiny-btn secondary" type="button" data-play-subquestion="${index}">▶ 播放题目</button>
+                        <button class="tiny-btn dark" type="button" data-answer-subquestion="${index}">开始回答</button>
                         <button class="tiny-btn" type="button" data-teach="${index}">💡 教我回答</button>
                         <button class="tiny-btn" type="button" data-polish="${index}">✨ 定制答案</button>
                       </div>
@@ -1427,8 +1429,24 @@ function bindEvents() {
     button.addEventListener("click", beginPractice);
   });
 
+  document.querySelectorAll("[data-answer-subquestion]").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.currentQuestionIndex = Number(button.dataset.answerSubquestion || 0);
+      state.retryFromFeedback = false;
+      beginPractice();
+    });
+  });
+
   document.querySelectorAll("[data-play-question]").forEach((button) => {
     button.addEventListener("click", () => speakText(getCurrentQuestion(), "en-US"));
+  });
+
+  document.querySelectorAll("[data-play-subquestion]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const index = Number(button.dataset.playSubquestion || 0);
+      const question = getCurrentSet().questions[index] || getCurrentQuestion();
+      speakText(question, "en-US");
+    });
   });
 
   document.querySelectorAll("[data-start-record]").forEach((button) => {
@@ -1909,7 +1927,15 @@ async function speakWithServerTTS(text, instructions) {
       state.ttsAudio = null;
     }
   };
-  await audio.play();
+  try {
+    await audio.play();
+  } catch (error) {
+    URL.revokeObjectURL(audioUrl);
+    if (state.ttsAudio === audio) {
+      state.ttsAudio = null;
+    }
+    throw error;
+  }
 }
 
 function buildTtsInstructions(lang) {
