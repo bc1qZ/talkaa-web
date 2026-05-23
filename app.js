@@ -850,6 +850,20 @@ function renderPracticeScreen() {
 function renderFeedbackScreen() {
   const set = getCurrentSet();
   const result = state.lastResult || buildResult(set.sampleAnswer, set, state.currentQuestionIndex, { persist: false });
+  const issueBadges = [result.weakestMetric, ...(result.errorTags || [])].slice(0, 4);
+  const whyRows = (result.improvementEdits || [])
+    .slice(0, 2)
+    .map(
+      (item) => `
+        <div class="why-row">
+          <div class="why-before">${item.original}</div>
+          <div class="why-arrow">→</div>
+          <div class="why-after">${item.improved}</div>
+          <p>${item.reason}</p>
+        </div>
+      `
+    )
+    .join("");
 
   return `
     <section class="screen ${state.screen === "feedback" ? "active" : ""}" data-screen="feedback">
@@ -879,32 +893,56 @@ function renderFeedbackScreen() {
       </div>
       <div class="score-line">🎯 当前估计分: ${Number(result.overall).toFixed(1)}</div>
       <div class="result-summary">${result.summary}</div>
-      <div class="focus-card panel">
-        <div class="focus-kicker">这次先只改 1 件事</div>
-        <h4>${result.mainFocus.title}</h4>
+
+      <div class="feedback-section panel">
+        <div class="feedback-section-kicker">这次问题判断</div>
+        <h4>先看清这次主要卡在哪里</h4>
+        <div class="issue-badges">
+          ${issueBadges.map((item) => `<span class="issue-badge">${item}</span>`).join("")}
+        </div>
         <p>${result.mainFocus.body}</p>
+      </div>
+
+      <div class="feedback-section panel">
+        <div class="feedback-section-kicker">为什么这么改</div>
+        <h4>不是只告诉你答案，而是告诉你为什么这样更好</h4>
+        ${
+          whyRows ||
+          `<div class="why-row">
+             <div class="why-before">原回答偏短或偏平</div>
+             <div class="why-arrow">→</div>
+             <div class="why-after">补上原因、细节、连接词</div>
+             <p>这样修改的目的，是让回答更完整、更自然，也更接近 7 分到 7.5 的表达方式。</p>
+           </div>`
+        }
+      </div>
+
+      <div class="feedback-section panel">
+        <div class="feedback-section-kicker">下一次直接怎么说</div>
+        <h4>${result.mainFocus.title}</h4>
         <div class="focus-template">
-          <strong>下一次可以直接套这个结构：</strong>
+          <strong>直接套这个结构：</strong>
           <span>${result.nextAnswerTemplate}</span>
         </div>
-      </div>
-      <div class="micro-grid">
-        <div class="micro-card panel">
-          <div class="micro-title">替换词</div>
-          <p>${result.replacementWords.join(" / ")}</p>
+        <div class="micro-grid">
+          <div class="micro-card panel">
+            <div class="micro-title">替换词</div>
+            <p>${result.replacementWords.join(" / ")}</p>
+          </div>
+          <div class="micro-card panel">
+            <div class="micro-title">30 秒小任务</div>
+            <p>${result.microDrill}</p>
+          </div>
         </div>
-        <div class="micro-card panel">
-          <div class="micro-title">30 秒小任务</div>
-          <p>${result.microDrill}</p>
-        </div>
       </div>
-      <div class="analysis-card">
-        <h4>💡 点评与建议</h4>
+
+      <div class="analysis-card panel">
+        <h4>分维度看问题</h4>
         ${result.analyses
           .map(
             (item) => `
               <div class="analysis-item">
-                <strong>• ${item.name}</strong>
+                <strong>${item.name}</strong>
                 <p>${item.text}</p>
               </div>
             `
