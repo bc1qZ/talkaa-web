@@ -2,6 +2,8 @@ const practiceSets = [
   {
     id: "crowded-place",
     part: "Part1",
+    category: "City Life",
+    source: "Cambridge-style",
     titleZh: "拥挤的地方",
     titleEn: "Crowded place",
     status: "done",
@@ -65,6 +67,8 @@ const practiceSets = [
   {
     id: "story-book-animals",
     part: "Part2",
+    category: "Books & Stories",
+    source: "Cambridge-style",
     titleZh: "包含动物的故事或书",
     titleEn: "Describe a story/book with animals in it",
     status: "pending",
@@ -118,6 +122,8 @@ const practiceSets = [
   {
     id: "interesting-building",
     part: "Part3",
+    category: "Places & Architecture",
+    source: "Cambridge-style",
     titleZh: "有趣的建筑",
     titleEn: "Describe an interesting building",
     status: "pending",
@@ -155,12 +161,172 @@ const practiceSets = [
         text: "长词建议慢一点说，尤其是 futuristic 和 architecture。"
       }
     ]
+  },
+  {
+    id: "headphones",
+    part: "Part1",
+    category: "Technology",
+    source: "Cambridge-style",
+    titleZh: "耳机",
+    titleEn: "Headphones",
+    status: "pending",
+    questions: [
+      "Do you use headphones?",
+      "What type of headphones do you use?",
+      "When do you usually use them?",
+      "When would you avoid using headphones?",
+      "Is wearing headphones comfortable for you?"
+    ],
+    sampleAnswer:
+      "Yes, I do. I mainly use wireless earphones because they're convenient and easy to carry around, especially when I commute or work out.",
+    polishedAnswer:
+      "Yes, definitely. I mainly use wireless earphones because they're light, convenient, and easy to carry around. I usually wear them when I'm commuting, exercising, or trying to focus in a noisy place.",
+    suggestions: [],
+    metrics: { fluency: 5, pronunciation: 5, vocabulary: 5, grammar: 5 },
+    analyses: []
+  },
+  {
+    id: "morning-routine",
+    part: "Part1",
+    category: "Daily Life",
+    source: "Cambridge-style",
+    titleZh: "晨间习惯",
+    titleEn: "Morning routine",
+    status: "pending",
+    questions: [
+      "Do you usually get up early?",
+      "What do you normally do in the morning?",
+      "Is breakfast important to you?",
+      "Do you prefer a busy morning or a slow morning?"
+    ],
+    sampleAnswer:
+      "I usually get up quite early because I like having a little quiet time before the day starts.",
+    polishedAnswer:
+      "I usually get up fairly early because I like having some quiet time before the day starts. It helps me feel more organized and less rushed.",
+    suggestions: [],
+    metrics: { fluency: 5, pronunciation: 5, vocabulary: 5, grammar: 5 },
+    analyses: []
+  },
+  {
+    id: "public-transport",
+    part: "Part1",
+    category: "Transport",
+    source: "Cambridge-style",
+    titleZh: "公共交通",
+    titleEn: "Public transport",
+    status: "pending",
+    questions: [
+      "Do you often use public transport?",
+      "What kinds of public transport are common in your city?",
+      "Do you prefer buses or the subway?",
+      "How could public transport be improved?"
+    ],
+    sampleAnswer:
+      "Yes, I use it quite often, especially the subway, because it's cheap and much faster than driving during rush hour.",
+    polishedAnswer:
+      "Yes, I use public transport quite often, especially the subway, because it's affordable and much faster than driving during rush hour. In my city, it's one of the most practical ways to get around.",
+    suggestions: [],
+    metrics: { fluency: 5, pronunciation: 5, vocabulary: 5.5, grammar: 5 },
+    analyses: []
+  },
+  {
+    id: "teacher-influence",
+    part: "Part2",
+    category: "People",
+    source: "Cambridge-style",
+    titleZh: "影响你的老师",
+    titleEn: "Describe a teacher who influenced you",
+    status: "pending",
+    cueCard: [
+      "Who the teacher was",
+      "When you were taught by this teacher",
+      "What made this teacher special",
+      "And explain how this teacher influenced you"
+    ],
+    questions: ["Describe a teacher who influenced you"],
+    sampleAnswer:
+      "I'd like to talk about my high school English teacher, who made me much more confident about speaking in public.",
+    polishedAnswer:
+      "I'd like to talk about my high school English teacher, who had a huge influence on me. She encouraged me to speak up in class and gave me a lot of confidence, especially when I was nervous about making mistakes.",
+    suggestions: [],
+    metrics: { fluency: 5.5, pronunciation: 5.5, vocabulary: 5.5, grammar: 5 },
+    analyses: []
+  },
+  {
+    id: "useful-skill",
+    part: "Part2",
+    category: "Learning",
+    source: "Cambridge-style",
+    titleZh: "有用的技能",
+    titleEn: "Describe a useful skill you want to learn",
+    status: "pending",
+    cueCard: [
+      "What the skill is",
+      "Why you want to learn it",
+      "How you would learn it",
+      "And explain why it would be useful"
+    ],
+    questions: ["Describe a useful skill you want to learn"],
+    sampleAnswer:
+      "A useful skill I'd like to learn is public speaking, because it would help me a lot in both work and study.",
+    polishedAnswer:
+      "A useful skill I'd really like to learn is public speaking, because it would help me in both work and study. I think it would make me sound more confident, organized, and persuasive when I share my ideas.",
+    suggestions: [],
+    metrics: { fluency: 5.5, pronunciation: 5, vocabulary: 5.5, grammar: 5 },
+    analyses: []
+  },
+  {
+    id: "city-development",
+    part: "Part3",
+    category: "Society",
+    source: "Cambridge-style",
+    titleZh: "城市发展",
+    titleEn: "City development",
+    status: "pending",
+    questions: [
+      "Why do cities become more crowded over time?",
+      "What problems can rapid urban development cause?",
+      "Should governments invest more in smaller cities?",
+      "How can cities balance convenience and quality of life?"
+    ],
+    sampleAnswer:
+      "Cities often become more crowded because they attract jobs, universities, and better public services.",
+    polishedAnswer:
+      "Cities often become more crowded because they attract jobs, universities, and better public services. As a result, more people move there for opportunities, even though that can create pressure on housing and transport.",
+    suggestions: [],
+    metrics: { fluency: 5, pronunciation: 5, vocabulary: 5.5, grammar: 5.5 },
+    analyses: []
+  },
+  {
+    id: "technology-communication",
+    part: "Part3",
+    category: "Technology",
+    source: "Cambridge-style",
+    titleZh: "科技与交流",
+    titleEn: "Technology and communication",
+    status: "pending",
+    questions: [
+      "How has technology changed the way people communicate?",
+      "Do you think online communication is as effective as face-to-face communication?",
+      "What are the disadvantages of relying too much on technology?"
+    ],
+    sampleAnswer:
+      "Technology has made communication much faster and more convenient, but sometimes it also makes conversations feel less personal.",
+    polishedAnswer:
+      "Technology has made communication much faster and more convenient, especially through messaging apps and video calls. However, I don't think it always feels as personal or meaningful as face-to-face communication.",
+    suggestions: [],
+    metrics: { fluency: 5.5, pronunciation: 5, vocabulary: 5.5, grammar: 5.5 },
+    analyses: []
   }
 ];
 
 const state = {
   screen: "home",
   homeTab: "home",
+  questionPartFilter: "all",
+  reportRange: "all",
+  reportMode: "speaking",
+  reportEditMode: false,
   currentSetId: practiceSets[0].id,
   currentQuestionIndex: 0,
   selectedVoice: "Eric",
@@ -222,12 +388,16 @@ function render() {
     ${renderDetailScreen()}
     ${renderPracticeScreen()}
     ${renderFeedbackScreen()}
-    ${renderReportScreen()}
+    ${renderReportDetailScreen()}
   `;
   bindEvents();
 }
 
 function renderHomeScreen() {
+  if (state.homeTab === "report") {
+    return renderReportOverviewScreen();
+  }
+
   const dashboard = getDashboardSummary();
   const topErrors = getTopErrors();
   const quote = getMotivationQuote();
@@ -284,11 +454,17 @@ function renderHomeTabContent(dashboard, topErrors) {
         <div class="section-head">
           <div>
             <h3>全部真题</h3>
-            <p>直接点进任意题目开始训练</p>
+            <p>按 Part 分类浏览，直接点进任意题目开始训练</p>
           </div>
         </div>
+        <div class="filter-row">
+          <button class="filter-chip ${state.questionPartFilter === "all" ? "active" : ""}" type="button" data-part-filter="all">全部</button>
+          <button class="filter-chip ${state.questionPartFilter === "Part1" ? "active" : ""}" type="button" data-part-filter="Part1">Part 1</button>
+          <button class="filter-chip ${state.questionPartFilter === "Part2" ? "active" : ""}" type="button" data-part-filter="Part2">Part 2</button>
+          <button class="filter-chip ${state.questionPartFilter === "Part3" ? "active" : ""}" type="button" data-part-filter="Part3">Part 3</button>
+        </div>
         <div class="task-panel no-top">
-          ${renderTaskRows()}
+          ${renderTaskRows(state.questionPartFilter)}
         </div>
       </div>
     `;
@@ -314,39 +490,6 @@ function renderHomeTabContent(dashboard, topErrors) {
             <div class="coach-value">可接 TTS</div>
             <p>你后面可以接入更自然的 TTS，把浏览器默认朗读替换掉。</p>
           </div>
-        </div>
-      </div>
-    `;
-  }
-
-  if (state.homeTab === "report") {
-    return `
-      <div class="panel list-surface">
-        <div class="section-head">
-          <div>
-            <h3>训练报告</h3>
-            <p>先看趋势，再决定今天练哪一题</p>
-          </div>
-        </div>
-        <div class="habit-card panel inner-panel">
-          <div class="habit-top">
-            <div>
-              <strong>近 7 次表现</strong>
-              <div class="muted">目标是稳步接近 7.5</div>
-            </div>
-          </div>
-          <div class="habit-metrics">
-            <div><span>${dashboard.averageBand}</span><label>近 7 次均分</label></div>
-            <div><span>${dashboard.retries}</span><label>二次重答</label></div>
-            <div><span>${dashboard.targetGap}</span><label>距 7.5</label></div>
-          </div>
-        </div>
-        <div class="section-title compact-title">
-          <span class="accent-bar"></span>
-          <span>最近反复出现的问题</span>
-        </div>
-        <div class="panel weakness-panel">
-          ${renderWeaknessRows(topErrors)}
         </div>
       </div>
     `;
@@ -414,20 +557,125 @@ function renderHomeTabContent(dashboard, topErrors) {
         </div>
       </div>
       <div class="task-panel no-top">
-        ${renderTaskRows()}
+        ${renderTaskRows("all", 4)}
       </div>
     </div>
   `;
 }
 
-function renderTaskRows() {
-  return practiceSets
+function renderReportOverviewScreen() {
+  const overview = getReportOverview();
+  const entries = getFilteredHistoryEntries();
+  const modeLabel = state.reportMode === "speaking" ? "口语真题" : "模考评分";
+
+  return `
+    <section class="screen ${state.screen === "home" ? "active" : ""}" data-screen="home">
+      <div class="report-shell">
+        <div class="report-topbar">
+          <span></span>
+          <h1>学习总结</h1>
+          <button class="report-edit-btn" type="button" data-toggle-report-edit="true">${state.reportEditMode ? "完成" : "编辑"}</button>
+        </div>
+
+        <div class="report-stat-grid">
+          ${renderReportStatCard("★", overview.bestScore, "最高得分", "gold")}
+          ${renderReportStatCard("◔", `${overview.todayMinutes} 分钟`, "今日练习", "slate")}
+          ${renderReportStatCard("◉", `${overview.streak} 天`, "坚持天数", "orange")}
+          ${renderReportStatCard("▮▮▮", `${overview.totalHours} 小时`, "累计练习", "green")}
+        </div>
+
+        <div class="report-range-tabs">
+          <button class="filter-chip ${state.reportRange === "all" ? "active" : ""}" type="button" data-report-range="all">全部</button>
+          <button class="filter-chip ${state.reportRange === "today" ? "active" : ""}" type="button" data-report-range="today">今天</button>
+          <button class="filter-chip ${state.reportRange === "7d" ? "active" : ""}" type="button" data-report-range="7d">近7天</button>
+          <button class="filter-chip ${state.reportRange === "30d" ? "active" : ""}" type="button" data-report-range="30d">近30天</button>
+        </div>
+
+        <div class="report-mode-switch">
+          <button class="report-mode-btn ${state.reportMode === "speaking" ? "active" : ""}" type="button" data-report-mode="speaking">口语真题</button>
+          <button class="report-mode-btn ${state.reportMode === "mock" ? "active" : ""}" type="button" data-report-mode="mock">模考评分</button>
+        </div>
+
+        <div class="report-history-list">
+          ${
+            entries.length
+              ? entries.map((entry) => renderReportHistoryCard(entry)).join("")
+              : `<div class="report-empty panel">
+                   <strong>${modeLabel}还没有记录</strong>
+                   <p>先完成 1 次训练，报告页就会开始累计你的得分、时长和趋势。</p>
+                 </div>`
+          }
+        </div>
+      </div>
+
+      <div class="nav-bar">
+        <button class="nav-item ${state.homeTab === "home" ? "active" : ""}" type="button" data-home-tab="home">首页</button>
+        <button class="nav-item ${state.homeTab === "questions" ? "active" : ""}" type="button" data-home-tab="questions">真题</button>
+        <button class="nav-item ${state.homeTab === "custom" ? "active" : ""}" type="button" data-home-tab="custom">定制</button>
+        <button class="nav-item active" type="button" data-home-tab="report">报告</button>
+        <button class="nav-item ${state.homeTab === "me" ? "active" : ""}" type="button" data-home-tab="me">我的</button>
+      </div>
+    </section>
+  `;
+}
+
+function renderReportStatCard(icon, value, label, tone) {
+  return `
+    <div class="report-stat-card panel">
+      <div class="report-stat-icon ${tone}">${icon}</div>
+      <div class="report-stat-copy">
+        <strong>${value}</strong>
+        <span>${label}</span>
+      </div>
+    </div>
+  `;
+}
+
+function renderReportHistoryCard(entry) {
+  const score = Number(entry.overall || 0).toFixed(1);
+  const titleEn = entry.titleEn || getPracticeSetById(entry.setId)?.titleEn || "Speaking task";
+  const titleZh = entry.titleZh || getPracticeSetById(entry.setId)?.titleZh || "口语训练";
+  const part = entry.part || getPracticeSetById(entry.setId)?.part || "Part1";
+  const dateText = formatHistoryDateTime(entry.timestamp || entry.date);
+  const scoreAngle = Math.max(12, Math.min((Number(entry.overall || 0) / 9) * 360, 360));
+  const scoreStyle = `background: conic-gradient(#da6557 0deg ${scoreAngle}deg, #f3e9e4 ${scoreAngle}deg 360deg);`;
+
+  return `
+    <div class="report-history-card panel">
+      <button class="report-history-open" type="button" data-open-history="${entry.id || ""}">
+        <div class="report-history-part">${part.replace("Part", "PART ")}</div>
+        <div class="report-history-main">
+          <strong>${titleEn}</strong>
+          <span>${titleZh}</span>
+          <label>${dateText}</label>
+        </div>
+        <div class="report-score-wrap">
+          <div class="report-score-ring" style="${scoreStyle}">
+            <div class="report-score-core">${score}</div>
+          </div>
+          <div class="report-card-arrow">›</div>
+        </div>
+      </button>
+      ${
+        state.reportEditMode
+          ? `<button class="report-delete-btn" type="button" data-delete-history="${entry.id || ""}">删除</button>`
+          : ""
+      }
+    </div>
+  `;
+}
+
+function renderTaskRows(partFilter = "all", limit = null) {
+  const filteredSets = practiceSets.filter((set) => partFilter === "all" || set.part === partFilter);
+  const finalSets = typeof limit === "number" ? filteredSets.slice(0, limit) : filteredSets;
+  return finalSets
     .map(
       (set) => `
         <button class="task-row clean-task-row" type="button" data-open-set="${set.id}">
           <span class="radio ${set.status === "done" ? "done" : ""}"></span>
           <span class="task-copy">
             <span class="badge ${set.part.toLowerCase()}">${set.part}</span>
+            <span class="task-category">${set.category}</span>
             <div class="task-title ${set.status === "done" ? "done" : ""}">${set.titleEn}</div>
             <div class="task-subtitle">${set.titleZh}</div>
           </span>
@@ -654,14 +902,14 @@ function renderFeedbackScreen() {
   `;
 }
 
-function renderReportScreen() {
+function renderReportDetailScreen() {
   const set = getCurrentSet();
   const result = state.lastResult || buildResult(set.sampleAnswer, set, state.currentQuestionIndex, { persist: false });
 
   return `
-    <section class="screen ${state.screen === "report" ? "active" : ""}" data-screen="report">
+    <section class="screen ${state.screen === "report-detail" ? "active" : ""}" data-screen="report-detail">
       <div class="page-header">
-        <button class="back-btn" type="button" data-back="feedback">‹ 返回</button>
+        <button class="back-btn" type="button" data-back-report-overview="true">‹ 返回</button>
         <span></span>
         <button class="ghost-btn" type="button" data-close-report="true">✕</button>
       </div>
@@ -803,8 +1051,21 @@ function bindEvents() {
 
   document.querySelectorAll("[data-home-tab]").forEach((button) => {
     button.addEventListener("click", () => {
+      if (button.dataset.homeTab === "report") {
+        state.homeTab = "report";
+        state.screen = "home";
+        render();
+        return;
+      }
       state.homeTab = button.dataset.homeTab;
       state.screen = "home";
+      render();
+    });
+  });
+
+  document.querySelectorAll("[data-part-filter]").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.questionPartFilter = button.dataset.partFilter;
       render();
     });
   });
@@ -840,11 +1101,21 @@ function bindEvents() {
   });
 
   document.querySelectorAll("[data-open-report]").forEach((button) => {
-    button.addEventListener("click", () => switchScreen("report"));
+    button.addEventListener("click", () => switchScreen("report-detail"));
   });
 
   document.querySelectorAll("[data-close-report]").forEach((button) => {
-    button.addEventListener("click", () => switchScreen("home"));
+    button.addEventListener("click", () => {
+      state.homeTab = "report";
+      switchScreen("home");
+    });
+  });
+
+  document.querySelectorAll("[data-back-report-overview]").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.homeTab = "report";
+      switchScreen("home");
+    });
   });
 
   document.querySelectorAll("[data-copy-answer]").forEach((button) => {
@@ -900,6 +1171,40 @@ function bindEvents() {
     button.addEventListener("click", () => {
       resetTodayProgress();
       render();
+    });
+  });
+
+  document.querySelectorAll("[data-report-range]").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.reportRange = button.dataset.reportRange;
+      render();
+    });
+  });
+
+  document.querySelectorAll("[data-report-mode]").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.reportMode = button.dataset.reportMode;
+      render();
+    });
+  });
+
+  document.querySelectorAll("[data-toggle-report-edit]").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.reportEditMode = !state.reportEditMode;
+      render();
+    });
+  });
+
+  document.querySelectorAll("[data-delete-history]").forEach((button) => {
+    button.addEventListener("click", () => {
+      deleteHistoryEntry(button.dataset.deleteHistory);
+      render();
+    });
+  });
+
+  document.querySelectorAll("[data-open-history]").forEach((button) => {
+    button.addEventListener("click", () => {
+      openHistoryReport(button.dataset.openHistory);
     });
   });
 }
@@ -1298,10 +1603,10 @@ function loadTrainingData() {
     if (!raw) {
       return getDefaultTrainingData();
     }
-    return {
+    return normalizeTrainingData({
       ...getDefaultTrainingData(),
       ...JSON.parse(raw)
-    };
+    });
   } catch (_error) {
     return getDefaultTrainingData();
   }
@@ -1317,6 +1622,19 @@ function getDefaultTrainingData() {
 
 function saveTrainingData() {
   localStorage.setItem("talkaa-lite-training-v3", JSON.stringify(state.trainingData));
+}
+
+function normalizeTrainingData(data) {
+  return {
+    ...data,
+    history: (data.history || []).map((item, index) => ({
+      mode: "speaking",
+      recordedSeconds: 0,
+      ...item,
+      id: item.id || item.timestamp || `${item.date || "history"}-${index}`,
+      timestamp: item.timestamp || (item.date ? `${item.date}T09:00:00.000Z` : new Date().toISOString())
+    }))
+  };
 }
 
 function getTodayKey() {
@@ -1397,13 +1715,26 @@ function getTopErrors() {
 }
 
 function updateTrainingData(result) {
+  const set = getPracticeSetById(result.setId);
+  const timestamp = new Date().toISOString();
   const snapshot = {
+    id: `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
     date: getTodayKey(),
+    timestamp,
     setId: result.setId,
+    titleEn: set?.titleEn || "",
+    titleZh: set?.titleZh || "",
+    part: result.part || set?.part || "",
+    category: set?.category || "",
+    questionIndex: Number(result.questionIndex || 0),
     overall: Number(result.overall),
     scores: result.scores,
     isRetry: state.retryFromFeedback,
-    errorTags: result.errorTags
+    errorTags: result.errorTags,
+    recordedSeconds: Number(result.recordedSeconds || 0),
+    mode: "speaking",
+    scoreSource: result.scoreSource || "demo",
+    result
   };
   state.trainingData.history = [...state.trainingData.history, snapshot].slice(-60);
   result.errorTags.forEach((tag) => {
@@ -1416,6 +1747,93 @@ function resetTodayProgress() {
   const today = getTodayKey();
   state.trainingData.history = (state.trainingData.history || []).filter((item) => item.date !== today);
   saveTrainingData();
+}
+
+function deleteHistoryEntry(entryId) {
+  state.trainingData.history = (state.trainingData.history || []).filter((item) => item.id !== entryId);
+  saveTrainingData();
+}
+
+function getPracticeSetById(setId) {
+  return practiceSets.find((item) => item.id === setId);
+}
+
+function getFilteredHistoryEntries() {
+  const history = (state.trainingData.history || []).slice().reverse();
+  const now = new Date();
+
+  return history.filter((item) => {
+    if ((item.mode || "speaking") !== state.reportMode) {
+      return false;
+    }
+
+    const baseTime = new Date(item.timestamp || item.date || now.toISOString());
+    if (state.reportRange === "today") {
+      return (item.date || baseTime.toISOString().slice(0, 10)) === getTodayKey();
+    }
+    if (state.reportRange === "7d") {
+      return now - baseTime <= 7 * 24 * 60 * 60 * 1000;
+    }
+    if (state.reportRange === "30d") {
+      return now - baseTime <= 30 * 24 * 60 * 60 * 1000;
+    }
+    return true;
+  });
+}
+
+function getReportOverview() {
+  const entries = getFilteredHistoryEntries();
+  const todayEntries = (state.trainingData.history || []).filter((item) => item.date === getTodayKey() && (item.mode || "speaking") === "speaking");
+  const bestScore = entries.length ? Math.max(...entries.map((item) => Number(item.overall || 0))).toFixed(1) : "0.0";
+  const todayMinutes = Math.round(todayEntries.reduce((sum, item) => sum + Number(item.recordedSeconds || 0), 0) / 60);
+  const totalHours = (entries.reduce((sum, item) => sum + Number(item.recordedSeconds || 0), 0) / 3600).toFixed(1);
+
+  return {
+    bestScore,
+    todayMinutes,
+    streak: getTrainingStreak(state.trainingData.history || []),
+    totalHours
+  };
+}
+
+function formatHistoryDateTime(rawValue) {
+  const base = rawValue ? new Date(rawValue) : new Date();
+  if (Number.isNaN(base.getTime())) {
+    return rawValue || "";
+  }
+  const y = base.getFullYear();
+  const m = String(base.getMonth() + 1).padStart(2, "0");
+  const d = String(base.getDate()).padStart(2, "0");
+  const hh = String(base.getHours()).padStart(2, "0");
+  const mm = String(base.getMinutes()).padStart(2, "0");
+  return `${y}-${m}-${d} ${hh}:${mm}`;
+}
+
+function openHistoryReport(entryId) {
+  const entry = (state.trainingData.history || []).find((item) => item.id === entryId);
+  if (!entry) {
+    return;
+  }
+
+  if (entry.setId) {
+    state.currentSetId = entry.setId;
+  }
+  state.currentQuestionIndex = Number(entry.questionIndex || 0);
+
+  if (entry.result) {
+    state.lastResult = entry.result;
+  } else {
+    const set = getPracticeSetById(entry.setId) || getCurrentSet();
+    const fallbackTranscript = set?.sampleAnswer || "I am still building my practice history.";
+    const rebuilt = buildResult(fallbackTranscript, set, Number(entry.questionIndex || 0), { persist: false });
+    rebuilt.overall = Number(entry.overall || rebuilt.overall);
+    rebuilt.overallBand = Number(entry.overall || rebuilt.overall).toFixed(1);
+    rebuilt.scores = entry.scores || rebuilt.scores;
+    rebuilt.metrics = entry.scores || rebuilt.metrics;
+    state.lastResult = rebuilt;
+  }
+
+  switchScreen("report-detail");
 }
 
 function countWords(words) {
