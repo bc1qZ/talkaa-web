@@ -600,6 +600,9 @@ function renderFeedbackScreen() {
           <div>${result.recordedSeconds}"</div>
         </div>
       </div>
+      <div class="source-pill ${result.scoreSource === "real" ? "source-real" : "source-demo"}">
+        ${result.scoreSource === "real" ? "真实评分" : "演示评分"}
+      </div>
       <div class="score-line">🎯 当前估计分: ${Number(result.overall).toFixed(1)}</div>
       <div class="result-summary">${result.summary}</div>
       <div class="focus-card panel">
@@ -1061,12 +1064,18 @@ function buildResult(transcript, set, questionIndex = state.currentQuestionIndex
   const uniqueWords = new Set(words.map((word) => word.toLowerCase()));
   const wordFrequency = countWords(words);
   const sentenceCount = transcript.split(/[.!?]+/).filter((item) => item.trim()).length || 1;
-  const lengthScore = words.length >= 18 ? 5.5 : words.length >= 10 ? 5.0 : 4.5;
-  const varietyScore = uniqueWords.size >= 18 ? 5.5 : uniqueWords.size >= 10 ? 5.0 : 4.5;
+  const lengthScore = words.length >= 24 ? 6.0 : words.length >= 16 ? 5.0 : words.length >= 10 ? 4.0 : words.length >= 6 ? 3.5 : 2.5;
+  const varietyScore = uniqueWords.size >= 18 ? 5.5 : uniqueWords.size >= 12 ? 4.5 : uniqueWords.size >= 8 ? 3.5 : 2.5;
   const fluency = clampScore(lengthScore + (sentenceCount > 1 ? 0.2 : 0));
   const vocabulary = clampScore(varietyScore);
-  const grammar = clampScore(words.some((word) => ["because", "which", "when", "although"].includes(word.toLowerCase())) ? 5.5 : 5.0);
-  const pronunciation = clampScore(5.0 + (words.length > 12 ? 0.5 : 0));
+  const grammar = clampScore(
+    words.some((word) => ["because", "which", "when", "although"].includes(word.toLowerCase()))
+      ? 5.0
+      : words.length >= 10
+        ? 4.0
+        : 2.5
+  );
+  const pronunciation = clampScore(words.length >= 12 ? 4.5 : words.length >= 7 ? 3.5 : 2.5);
   const overall = roundBand((fluency + vocabulary + grammar + pronunciation) / 4);
   const errorTags = detectErrorTags({ words, wordFrequency, sentenceCount, transcript, scores: { fluency, vocabulary, grammar, pronunciation } });
   const weakestMetric = getWeakestMetric({ fluency, vocabulary, grammar, pronunciation });
@@ -1131,6 +1140,7 @@ function buildResult(transcript, set, questionIndex = state.currentQuestionIndex
       vocabulary,
       grammar
     },
+    scoreSource: "demo",
     summary,
     errorTags,
     weakestMetric,
@@ -1176,7 +1186,7 @@ function buildResult(transcript, set, questionIndex = state.currentQuestionIndex
 }
 
 function clampScore(value) {
-  return roundBand(Math.max(4.5, Math.min(6.0, value)));
+  return roundBand(Math.max(2.5, Math.min(6.5, value)));
 }
 
 function roundBand(value) {
@@ -1540,6 +1550,7 @@ function normalizeEvaluationResult(remote, set, questionIndex, transcript) {
     transcript: remote.transcript || transcript,
     overall: Number(remote.overall || remote.overallBand || 5.5),
     overallBand: String(remote.overallBand || remote.overall || 5.5),
+    scoreSource: "real",
     metrics: remote.metrics || scores,
     scores,
     analyses: remote.analyses || [],
@@ -1602,7 +1613,11 @@ function getRetryPrompt() {
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./sw.js").catch(() => {
+    navigator.serviceWorker
+      .getRegistrations()
+      .then((registrations) => Promise.all(registrations.map((registration) => registration.unregister())))
+      .catch(() => null);
+    navigator.serviceWorker.register("./sw.js?v=20260523c").catch(() => {
       return null;
     });
   });
