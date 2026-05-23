@@ -17,7 +17,7 @@ export function buildFallbackEvaluation({ set, question, transcript, questionInd
     briefFeedback: [
       {
         title: "流利度与连贯性",
-        body: "结构清楚，但离 8 分以上还差更自然的延展和更成熟的衔接。"
+        body: "结构已经清楚了，但如果想稳定到 7 分以上，还需要更自然地展开理由和细节，而不是停在短句。"
       },
       {
         title: "词汇",
@@ -32,18 +32,18 @@ export function buildFallbackEvaluation({ set, question, transcript, questionInd
         body: "当前为演示估算。正式版应结合音频声学特征做更真实的判断。"
       }
     ],
-    band8Targets: [
+    band75Targets: [
       {
-        title: "流利度要更像自然对话",
-        body: "Band 8 通常能自然展开观点，不会只停在短句和基本说明。"
+        title: "先把回答稳定拉到完整小段",
+        body: "7.5 不要求每句都很难，但通常不会太短。先做到答案、原因、细节这三步完整。"
       },
       {
-        title: "词汇要更精准",
-        body: "Band 8 需要更灵活的近义词和搭配，而不只是基本词。"
+        title: "词汇要更具体，不只是基础词",
+        body: "7 到 7.5 的提升，往往来自把 very crowded 这种基础表达换成更贴切的词。"
       },
       {
-        title: "句式要更丰富",
-        body: "建议稳定使用原因句、让步句和定语从句来展示能力。"
+        title: "句式开始有变化就会明显加分",
+        body: "先稳定使用 because、which 这类从句，比一开始追求特别复杂的句式更有效。"
       }
     ],
     polishedAnswer: set.polishedAnswer || "",

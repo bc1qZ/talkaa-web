@@ -1,5 +1,5 @@
 import fs from "node:fs/promises";
-import { band8Rubric } from "../lib/rubric.js";
+import { targetRubric } from "../lib/rubric.js";
 
 function requireEnv(name) {
   const value = process.env[name];
@@ -39,7 +39,7 @@ export async function evaluateWithOpenAI({ audioPath, set, question, transcriptH
       input: [
         {
           role: "system",
-          content: [{ type: "text", text: band8Rubric.systemPrompt.trim() }]
+          content: [{ type: "text", text: targetRubric.systemPrompt.trim() }]
         },
         {
           role: "user",
@@ -52,7 +52,7 @@ export async function evaluateWithOpenAI({ audioPath, set, question, transcriptH
                 titleEn: set.titleEn,
                 question,
                 transcript,
-                band8Rubric
+                targetRubric
               })
             }
           ]

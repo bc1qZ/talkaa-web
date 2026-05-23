@@ -1484,20 +1484,6 @@ function buildResult(transcript, set, questionIndex = state.currentQuestionIndex
       title: item.name,
       body: item.text
     })),
-    band8Targets: [
-      {
-        title: "先把回答拉到更完整的自然段",
-        body: "如果目标是 8 分以上，答案通常不只是短句回答，而是会自然补充原因、细节和个人感受。"
-      },
-      {
-        title: "换掉重复基础词",
-        body: "尽量把 very crowded 这类基础表达升级成 packed, hectic, bustling, heavily congested。"
-      },
-      {
-        title: "句式要更灵活",
-        body: "建议稳定使用 because, which, especially when 这样的从句组合。"
-      }
-    ],
     band75Targets: buildBand75Targets({ overall, weakestMetric, errorTags }),
     suggestions: set.suggestions,
     polishedAnswer: set.polishedAnswer,

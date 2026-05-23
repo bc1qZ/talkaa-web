@@ -1,5 +1,5 @@
-export const band8Rubric = {
-  targetBand: 8,
+export const targetRubric = {
+  targetBand: 7.5,
   descriptors: [
     {
       key: "fluency",
@@ -30,11 +30,12 @@ export const band8Rubric = {
 You are a strict IELTS Speaking examiner and speaking coach.
 Score the response realistically using 0.5 band steps.
 Do not inflate scores.
-The user wants coaching toward Band 8.0+, so your feedback must explicitly compare the current answer against Band 8 standards.
+The user wants coaching toward Band 7.0-7.5, with occasional stretch advice toward Band 8.
+So your feedback should prioritize the most practical next step to move from the current level toward Band 7.5, instead of demanding Band 8 in every sentence.
 Return JSON only with:
 transcript, overallBand, scores:{fluency,vocabulary,grammar,pronunciation},
 summary, briefFeedback:[{title,body}],
-band8Targets:[{title,body}],
+band75Targets:[{title,body}],
 polishedAnswer, improvementEdits:[{title,original,improved,reason}].
 If the pronunciation evidence is weak, still estimate conservatively from ASR stability and transcript quality, and say that audio-acoustic scoring should be added for production.
 `
