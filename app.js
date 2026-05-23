@@ -1,4 +1,4 @@
-const practiceSets = [
+const basePracticeSets = [
   {
     id: "crowded-place",
     part: "Part1",
@@ -319,6 +319,140 @@ const practiceSets = [
     analyses: []
   }
 ];
+
+const generatedPart1Topics = [
+  { slug: "home", category: "Home", titleZh: "家", titleEn: "Home", prompts: ["Do you live in a house or an apartment?", "What do you like most about your home?", "Is there anything you would like to change about your home?", "Do you think your home will be different in the future?"] },
+  { slug: "hometown", category: "City Life", titleZh: "家乡", titleEn: "Hometown", prompts: ["What is your hometown like?", "What do people usually do there?", "Has your hometown changed much?", "Would you like to keep living there in the future?"] },
+  { slug: "study", category: "Work & Study", titleZh: "学习", titleEn: "Study", prompts: ["What subject are you studying now?", "What do you enjoy most about it?", "Do you prefer studying alone or with other people?", "What would you like to improve in your studies?"] },
+  { slug: "work", category: "Work & Study", titleZh: "工作", titleEn: "Work", prompts: ["What kind of work do you do?", "What part of your job do you enjoy most?", "Is there anything difficult about your work?", "Do you think you will do the same job in the future?"] },
+  { slug: "friends", category: "People", titleZh: "朋友", titleEn: "Friends", prompts: ["Do you often spend time with your friends?", "What do you usually do together?", "Do you prefer having a small group of close friends or many friends?", "Has the way you make friends changed over time?"] },
+  { slug: "neighbors", category: "People", titleZh: "邻居", titleEn: "Neighbors", prompts: ["Do you know your neighbors well?", "What kind of neighbor do you think is good to have?", "Have your neighbors ever helped you?", "Is it important to have a good relationship with neighbors?"] },
+  { slug: "cooking", category: "Daily Life", titleZh: "做饭", titleEn: "Cooking", prompts: ["Do you often cook?", "What kinds of food do you usually cook?", "Did you learn to cook when you were young?", "Do you think cooking is an important skill?"] },
+  { slug: "breakfast", category: "Daily Life", titleZh: "早餐", titleEn: "Breakfast", prompts: ["Do you usually eat breakfast?", "What do you normally have for breakfast?", "Did you eat the same breakfast when you were a child?", "Do you think breakfast is important?"] },
+  { slug: "weekends", category: "Daily Life", titleZh: "周末", titleEn: "Weekends", prompts: ["What do you usually do at weekends?", "Do you prefer busy weekends or relaxing ones?", "Did you spend your weekends differently in the past?", "What would make a perfect weekend for you?"] },
+  { slug: "shopping", category: "Daily Life", titleZh: "购物", titleEn: "Shopping", prompts: ["Do you enjoy shopping?", "What do you usually buy?", "Do you prefer shopping online or in stores?", "Have your shopping habits changed in recent years?"] },
+  { slug: "music", category: "Media", titleZh: "音乐", titleEn: "Music", prompts: ["Do you often listen to music?", "What kind of music do you like?", "When do you usually listen to music?", "Has your taste in music changed over time?"] },
+  { slug: "movies", category: "Media", titleZh: "电影", titleEn: "Movies", prompts: ["Do you enjoy watching movies?", "What type of movies do you like best?", "Do you prefer watching movies at home or in the cinema?", "Did you watch many movies when you were younger?"] },
+  { slug: "reading", category: "Books & Media", titleZh: "阅读", titleEn: "Reading", prompts: ["Do you enjoy reading?", "What kinds of books or articles do you usually read?", "Did you read much as a child?", "Do you think people read more or less nowadays?"] },
+  { slug: "writing-by-hand", category: "Learning", titleZh: "手写", titleEn: "Writing by hand", prompts: ["Do you often write things by hand?", "What do you usually write by hand?", "Do you prefer typing or handwriting?", "Do you think children should still learn handwriting well?"] },
+  { slug: "maps", category: "Technology", titleZh: "地图", titleEn: "Maps", prompts: ["Do you often use maps?", "When do you usually need a map?", "Do you prefer paper maps or digital maps?", "Are you good at reading maps?"] },
+  { slug: "apps", category: "Technology", titleZh: "手机应用", titleEn: "Apps", prompts: ["What apps do you use most often?", "Is there any app that saves you a lot of time?", "Do you download new apps often?", "What kind of app would you like to have in the future?"] },
+  { slug: "photos", category: "Technology", titleZh: "照片", titleEn: "Photos", prompts: ["Do you often take photos?", "What do you like taking photos of?", "Do you prefer taking photos or videos?", "Do you often look back at old photos?"] },
+  { slug: "gifts", category: "People", titleZh: "礼物", titleEn: "Gifts", prompts: ["Do you enjoy giving gifts?", "What kind of gifts do you usually give?", "Do you prefer useful gifts or meaningful gifts?", "Have you ever received a gift you still remember clearly?"] },
+  { slug: "weather", category: "Environment", titleZh: "天气", titleEn: "Weather", prompts: ["What kind of weather do you like most?", "Does the weather affect your mood?", "What is the weather usually like in your city?", "Do you often check the weather forecast?"] },
+  { slug: "parks", category: "Places", titleZh: "公园", titleEn: "Parks", prompts: ["Do you often go to parks?", "What do people usually do in parks in your city?", "Did you go to parks often as a child?", "Do you think cities need more parks?"] },
+  { slug: "walking", category: "Health", titleZh: "散步", titleEn: "Walking", prompts: ["Do you walk a lot in your daily life?", "Where do you usually walk?", "Do you prefer walking alone or with others?", "Do you think people walk less than before?"] },
+  { slug: "exercise", category: "Health", titleZh: "锻炼", titleEn: "Exercise", prompts: ["Do you exercise often?", "What kind of exercise do you enjoy?", "Did you enjoy exercise when you were younger?", "What helps people keep exercising regularly?"] },
+  { slug: "noise", category: "City Life", titleZh: "噪音", titleEn: "Noise", prompts: ["Do you mind noisy places?", "What kinds of noise do you hear in your area?", "Are there any quiet places you like?", "Do you think cities are becoming noisier?"] },
+  { slug: "traffic", category: "Transport", titleZh: "交通", titleEn: "Traffic", prompts: ["Is traffic a problem in your city?", "What time is traffic usually worst?", "How do you avoid traffic jams?", "What could be done to improve traffic in cities?"] },
+  { slug: "bicycles", category: "Transport", titleZh: "自行车", titleEn: "Bicycles", prompts: ["Do you ride a bicycle?", "Did you ride a bike when you were a child?", "Is cycling popular where you live?", "Do you think cities should build more cycle lanes?"] },
+  { slug: "travel", category: "Travel", titleZh: "旅行", titleEn: "Travel", prompts: ["Do you like traveling?", "What kind of places do you like to visit?", "Do you prefer traveling alone or with others?", "What is the most important thing when planning a trip?"] },
+  { slug: "public-holidays", category: "Daily Life", titleZh: "节假日", titleEn: "Public holidays", prompts: ["Do you like public holidays?", "How do you usually spend them?", "Do people use holidays differently now compared with the past?", "What makes a holiday enjoyable for you?"] },
+  { slug: "bags", category: "Daily Life", titleZh: "包", titleEn: "Bags", prompts: ["Do you usually carry a bag with you?", "What do you often put in your bag?", "Have the kinds of bags you use changed over time?", "Do you prefer large bags or small bags?"] },
+  { slug: "snacks", category: "Food", titleZh: "零食", titleEn: "Snacks", prompts: ["Do you often eat snacks?", "What kinds of snacks do you like?", "Did you eat different snacks as a child?", "Do you think snacks are becoming healthier nowadays?"] },
+  { slug: "teachers", category: "People", titleZh: "老师", titleEn: "Teachers", prompts: ["Do you still keep in touch with any teachers?", "What qualities make a teacher memorable?", "Do you think teachers have become more important nowadays?", "Would you ever like to be a teacher?"] }
+];
+
+const generatedPart2Topics = [
+  { slug: "useful-advice", category: "People", titleZh: "一条有用的建议", titleEn: "Describe a piece of useful advice you received", cueCard: ["What the advice was", "Who gave it to you", "When you received it", "And explain why it was useful"], sample: "A useful piece of advice I received was to focus on one clear point before trying to sound impressive. My teacher told me this when I was preparing for an English speaking task, and it really helped me sound more organized." },
+  { slug: "memorable-trip", category: "Travel", titleZh: "一次难忘的旅行", titleEn: "Describe a memorable trip you had", cueCard: ["Where you went", "Who you went with", "What you did there", "And explain why it was memorable"], sample: "A memorable trip I had was a short visit to Chengdu with two close friends. We tried local food, visited museums, and spent a lot of time just walking around the city. I still remember it because it felt both relaxing and exciting." },
+  { slug: "useful-website", category: "Technology", titleZh: "一个有用的网站", titleEn: "Describe a useful website you often use", cueCard: ["What the website is", "How you found it", "What you use it for", "And explain why it is useful"], sample: "A useful website I often use is YouTube, especially for learning English and finding practical tutorials. I started using it in high school, and it still saves me a lot of time because I can learn almost anything there." },
+  { slug: "special-meal", category: "Food", titleZh: "一顿特别的饭", titleEn: "Describe a special meal you enjoyed", cueCard: ["What the meal was", "Who you had it with", "Where you ate it", "And explain why it was special"], sample: "A special meal I enjoyed was a hotpot dinner with my family during a holiday. The food was great, but what made it special was the relaxed atmosphere and the fact that we had enough time to talk properly." },
+  { slug: "interesting-person", category: "People", titleZh: "一个有趣的人", titleEn: "Describe an interesting person you know", cueCard: ["Who the person is", "How you know this person", "What this person is like", "And explain why you find this person interesting"], sample: "An interesting person I know is one of my former classmates, who always has creative ideas and a very positive attitude. I find him interesting because he can make ordinary conversations feel inspiring." },
+  { slug: "favorite-place", category: "Places", titleZh: "一个你喜欢的地方", titleEn: "Describe a place you enjoy visiting", cueCard: ["Where the place is", "How often you go there", "What you do there", "And explain why you like it"], sample: "A place I really enjoy visiting is a riverside park near my home. I usually go there in the evening to walk, clear my mind, and take a short break from my routine." },
+  { slug: "good-decision", category: "Life Choices", titleZh: "一个好的决定", titleEn: "Describe a good decision you made", cueCard: ["What the decision was", "When you made it", "Why you made it", "And explain why it was a good decision"], sample: "One good decision I made was to practice speaking English a little every day instead of only studying before exams. It was a good decision because it made my learning much more stable." },
+  { slug: "favorite-photo", category: "Photos", titleZh: "一张喜欢的照片", titleEn: "Describe a photo you like", cueCard: ["What the photo shows", "When it was taken", "Who took it", "And explain why you like it"], sample: "A photo I really like was taken during a family trip a few years ago. It captures a very natural moment, and every time I see it, it reminds me of how relaxed and happy we were." },
+  { slug: "important-rule", category: "Society", titleZh: "一条重要的规则", titleEn: "Describe a rule that you think is important", cueCard: ["What the rule is", "Where it applies", "Why it exists", "And explain why you think it is important"], sample: "An important rule I can think of is the rule about not using phones while driving. It may seem simple, but it protects both drivers and pedestrians." },
+  { slug: "useful-object", category: "Daily Life", titleZh: "一个有用的物品", titleEn: "Describe an object you find useful", cueCard: ["What the object is", "How often you use it", "Why you use it", "And explain why it is useful"], sample: "A useful object I use every day is my phone, not just for communication but also for maps, study, and time management. It saves me a lot of time in daily life." },
+  { slug: "old-person", category: "People", titleZh: "一位年长的人", titleEn: "Describe an older person you admire", cueCard: ["Who the person is", "How you know this person", "What this person is like", "And explain why you admire this person"], sample: "An older person I admire is my grandfather, because he is calm, disciplined, and always gives thoughtful advice. I admire him because he handles problems in a very steady way." },
+  { slug: "skill-improve", category: "Learning", titleZh: "想提高的一项技能", titleEn: "Describe a skill you would like to improve", cueCard: ["What the skill is", "Why you want to improve it", "How you plan to improve it", "And explain how it would help you"], sample: "A skill I would like to improve is public speaking. It would help me sound more confident, and I think it would also make me better at organizing my ideas." },
+  { slug: "quiet-place", category: "Places", titleZh: "一个安静的地方", titleEn: "Describe a quiet place you like", cueCard: ["Where it is", "When you go there", "What you do there", "And explain why you like it"], sample: "A quiet place I like is a small café near my home. I usually go there when I need to focus or just want a calmer environment than my apartment." },
+  { slug: "exciting-activity", category: "Leisure", titleZh: "一项令人兴奋的活动", titleEn: "Describe an exciting activity you did", cueCard: ["What the activity was", "When you did it", "Who you did it with", "And explain why it was exciting"], sample: "An exciting activity I once did was trying rafting during a short trip. It was exciting because everything happened so fast, and I had to stay focused the whole time." },
+  { slug: "helpful-person", category: "People", titleZh: "帮助过你的人", titleEn: "Describe a person who helped you", cueCard: ["Who the person was", "How this person helped you", "When it happened", "And explain how you felt about it"], sample: "A person who really helped me was one of my teachers, who encouraged me when I lacked confidence in speaking English. That support made a big difference to me." },
+  { slug: "interesting-conversation", category: "Communication", titleZh: "一次有趣的对话", titleEn: "Describe an interesting conversation you had", cueCard: ["Who you talked to", "What you talked about", "Where it happened", "And explain why it was interesting"], sample: "An interesting conversation I had was with an older taxi driver who had surprisingly thoughtful ideas about city life. I found it interesting because it changed the way I looked at everyday conversations." },
+  { slug: "popular-product", category: "Technology", titleZh: "一个很受欢迎的产品", titleEn: "Describe a popular product in your country", cueCard: ["What the product is", "Why it is popular", "Who uses it", "And explain what you think about it"], sample: "A popular product in my country is the smartphone, especially because people use it for almost everything. I think its popularity makes sense because it is convenient and versatile." },
+  { slug: "beautiful-city", category: "Places", titleZh: "一个漂亮的城市", titleEn: "Describe a beautiful city you visited", cueCard: ["What city it was", "When you visited it", "What you saw there", "And explain why you think it was beautiful"], sample: "A beautiful city I visited was Hangzhou. I remember the lake, the trees, and the calm atmosphere, and that combination made the whole city feel elegant." },
+  { slug: "important-event", category: "Life Events", titleZh: "一件重要的事", titleEn: "Describe an important event in your life", cueCard: ["What the event was", "When it happened", "What you learned from it", "And explain why it was important"], sample: "An important event in my life was finishing a difficult exam period and realizing that consistency mattered more than last-minute effort. It changed the way I study." },
+  { slug: "useful-book", category: "Books & Media", titleZh: "一本有用的书", titleEn: "Describe a useful book you read", cueCard: ["What the book was", "When you read it", "What it was about", "And explain why it was useful"], sample: "A useful book I read was a practical book about habits and self-discipline. It was useful because it gave me simple methods that I could actually apply in daily life." }
+];
+
+const generatedPart3Topics = [
+  { slug: "education-success", category: "Education", titleZh: "教育与成功", titleEn: "Education and success", prompts: ["Why do some students perform better than others?", "Do you think schools focus enough on practical skills?", "How can teachers keep students motivated?", "What changes in education are most needed today?"] },
+  { slug: "city-transport", category: "Transport", titleZh: "城市交通", titleEn: "Urban transport", prompts: ["Why do many cities struggle with traffic congestion?", "How can public transport be made more attractive?", "Should governments limit the use of private cars?", "How does transport affect people’s quality of life?"] },
+  { slug: "healthy-living", category: "Health", titleZh: "健康生活", titleEn: "Healthy living", prompts: ["Why do some people find it hard to live healthily?", "Do you think young people are healthier than older generations?", "What can schools do to encourage healthy habits?", "Should governments do more to improve public health?"] },
+  { slug: "technology-learning", category: "Technology", titleZh: "科技与学习", titleEn: "Technology in learning", prompts: ["How has technology changed the way people learn?", "What are the disadvantages of relying too much on technology in education?", "Do online resources make teachers less important?", "What kind of technology will be most useful in future classrooms?"] },
+  { slug: "tourism-impact", category: "Travel", titleZh: "旅游影响", titleEn: "Tourism and its impact", prompts: ["Why do some cities depend heavily on tourism?", "What problems can tourism create for local people?", "How can governments balance tourism and daily life?", "Do tourists and local residents usually want the same things?"] },
+  { slug: "environment-habits", category: "Environment", titleZh: "环保习惯", titleEn: "Environmental habits", prompts: ["Why do some people care more about the environment than others?", "What small habits can make a real difference?", "Should environmental education start early?", "What role should businesses play in environmental protection?"] },
+  { slug: "food-culture", category: "Food", titleZh: "饮食文化", titleEn: "Food culture", prompts: ["Why is food such an important part of culture?", "How have eating habits changed in recent years?", "Do you think fast food is affecting traditional food culture?", "Should families eat together more often?"] },
+  { slug: "work-life-balance", category: "Work", titleZh: "工作与生活平衡", titleEn: "Work-life balance", prompts: ["Why do many people find it hard to balance work and life?", "Do you think young people value free time more than older generations?", "How can employers help staff achieve better balance?", "Is work-life balance equally important in every job?"] },
+  { slug: "media-influence", category: "Media", titleZh: "媒体影响", titleEn: "Media influence", prompts: ["How does social media affect the way people think?", "Why do some people trust online information too easily?", "Should there be stricter rules for online platforms?", "How can people become more critical consumers of media?"] },
+  { slug: "public-spaces", category: "Places", titleZh: "公共空间", titleEn: "Public spaces", prompts: ["Why are public spaces important in cities?", "What makes a public space attractive to people?", "Do modern cities provide enough public spaces?", "How do public spaces influence social life?"] },
+  { slug: "childhood-development", category: "Education", titleZh: "儿童发展", titleEn: "Child development", prompts: ["What is most important for children’s development?", "Do children learn more from parents or teachers?", "How has childhood changed compared with the past?", "Should children have more freedom or more rules?"] },
+  { slug: "consumer-choice", category: "Society", titleZh: "消费选择", titleEn: "Consumer choices", prompts: ["Why do people sometimes buy things they do not need?", "How does advertising influence buying decisions?", "Are people becoming more careful with money nowadays?", "Should schools teach financial habits?"] },
+  { slug: "communication-skills", category: "Communication", titleZh: "沟通能力", titleEn: "Communication skills", prompts: ["Why are communication skills important in modern life?", "Do you think people communicate better face to face or online?", "Can communication skills be taught effectively?", "What communication problems are most common today?"] },
+  { slug: "art-value", category: "Culture", titleZh: "艺术价值", titleEn: "The value of art", prompts: ["Why is art important in society?", "Do young people value art as much as older people?", "Should governments invest more in art and culture?", "How can art be made more accessible to the public?"] },
+  { slug: "future-cities", category: "City Life", titleZh: "未来城市", titleEn: "Future cities", prompts: ["What will cities be like in the future?", "How might technology improve city life?", "What problems will cities face in the future?", "Should future cities be designed differently from current ones?"] },
+  { slug: "friendship-change", category: "People", titleZh: "友谊变化", titleEn: "Friendship over time", prompts: ["Why do friendships change as people get older?", "Is it easier to make friends when you are young?", "Do online friendships have the same value as offline ones?", "What makes a friendship last a long time?"] },
+  { slug: "decision-making", category: "Life Choices", titleZh: "做决定", titleEn: "Decision-making", prompts: ["Why are some people better at making decisions than others?", "Should important decisions be made quickly or slowly?", "How do other people influence our decisions?", "Do young and old people make decisions differently?"] },
+  { slug: "books-vs-video", category: "Books & Media", titleZh: "书和视频", titleEn: "Books and video content", prompts: ["Why do some people prefer videos to books?", "Do you think reading develops different skills from watching videos?", "Will books become less important in the future?", "How can parents encourage children to read more?"] },
+  { slug: "competition", category: "Society", titleZh: "竞争", titleEn: "Competition", prompts: ["Why is competition common in modern life?", "Is competition always a good thing?", "Do children need competition at school?", "How can competition become unhealthy?"] },
+  { slug: "shopping-habits", category: "Daily Life", titleZh: "购物习惯", titleEn: "Shopping habits", prompts: ["How have shopping habits changed in recent years?", "Why do people enjoy shopping as a leisure activity?", "What are the downsides of online shopping?", "Do you think people will shop differently in the future?"] }
+];
+
+function buildGeneratedPracticeSets() {
+  const part1Sets = generatedPart1Topics.map((topic) => ({
+    id: `gen-p1-${topic.slug}`,
+    part: "Part1",
+    category: topic.category,
+    source: "Cambridge-style",
+    titleZh: topic.titleZh,
+    titleEn: topic.titleEn,
+    status: "pending",
+    questions: topic.prompts,
+    sampleAnswer: `Yes, definitely. ${topic.titleEn} is part of my daily life, and I can usually say something personal about it quite easily.`,
+    polishedAnswer: `Yes, definitely. ${topic.titleEn} is something that comes up quite naturally in my daily life, so I usually have clear opinions and a few personal examples to share.`,
+    suggestions: [],
+    metrics: { fluency: 5.0, pronunciation: 5.0, vocabulary: 5.0, grammar: 5.0 },
+    analyses: []
+  }));
+
+  const part2Sets = generatedPart2Topics.map((topic) => ({
+    id: `gen-p2-${topic.slug}`,
+    part: "Part2",
+    category: topic.category,
+    source: "Cambridge-style",
+    titleZh: topic.titleZh,
+    titleEn: topic.titleEn,
+    status: "pending",
+    cueCard: topic.cueCard,
+    questions: [topic.titleEn],
+    sampleAnswer: topic.sample,
+    polishedAnswer: `${topic.sample} What made it especially meaningful was that it gave me something practical to remember and talk about later.`,
+    suggestions: [],
+    metrics: { fluency: 5.5, pronunciation: 5.0, vocabulary: 5.5, grammar: 5.0 },
+    analyses: []
+  }));
+
+  const part3Sets = generatedPart3Topics.map((topic) => ({
+    id: `gen-p3-${topic.slug}`,
+    part: "Part3",
+    category: topic.category,
+    source: "Cambridge-style",
+    titleZh: topic.titleZh,
+    titleEn: topic.titleEn,
+    status: "pending",
+    questions: topic.prompts,
+    sampleAnswer: `I think there are several reasons for that. In general, it depends on people’s lifestyle, the opportunities available to them, and the kind of environment they live in.`,
+    polishedAnswer: `I think there are several reasons for that. In general, it depends on people’s lifestyle, the opportunities available to them, and the kind of environment they live in. That is why the answer is rarely simple or the same for everyone.`,
+    suggestions: [],
+    metrics: { fluency: 5.5, pronunciation: 5.0, vocabulary: 5.5, grammar: 5.5 },
+    analyses: []
+  }));
+
+  return [...part1Sets, ...part2Sets, ...part3Sets];
+}
+
+const practiceSets = [...basePracticeSets, ...buildGeneratedPracticeSets()];
 
 const state = {
   screen: "home",
@@ -696,18 +830,22 @@ function renderTaskRows(partFilter = "all", limit = null) {
   const finalSets = typeof limit === "number" ? filteredSets.slice(0, limit) : filteredSets;
   return finalSets
     .map(
-      (set) => `
+      (set) => {
+        const practiceCount = getPracticeCount(set.id);
+        return `
         <button class="task-row clean-task-row" type="button" data-open-set="${set.id}">
-          <span class="radio ${set.status === "done" ? "done" : ""}"></span>
+          <span class="radio ${practiceCount > 0 ? "done" : ""}"></span>
           <span class="task-copy">
             <span class="badge ${set.part.toLowerCase()}">${set.part}</span>
             <span class="task-category">${set.category}</span>
-            <div class="task-title ${set.status === "done" ? "done" : ""}">${set.titleEn}</div>
+            ${practiceCount > 0 ? `<span class="task-count-badge">练过 ${practiceCount} 次</span>` : ""}
+            <div class="task-title">${set.titleEn}</div>
             <div class="task-subtitle">${set.titleZh}</div>
           </span>
           <span class="chev">›</span>
         </button>
-      `
+      `;
+      }
     )
     .join("");
 }
@@ -1762,6 +1900,10 @@ function getTopErrors() {
     .map(([name, count]) => ({ name, count }))
     .sort((a, b) => b.count - a.count)
     .slice(0, 4);
+}
+
+function getPracticeCount(setId) {
+  return (state.trainingData.history || []).filter((item) => item.setId === setId).length;
 }
 
 function updateTrainingData(result) {
