@@ -5,7 +5,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { readQuestionBank, getSetById } from "./lib/questionBank.js";
-import { evaluateWithOpenAI } from "./adapters/openaiAdapter.js";
+import { evaluateWithOpenAI, synthesizeSpeechWithOpenAI } from "./adapters/openaiAdapter.js";
 import { buildFallbackEvaluation } from "./lib/fallbackEvaluation.js";
 
 const app = express();
@@ -28,6 +28,38 @@ app.get("/health", (_req, res) => {
 app.get("/api/question-bank", async (_req, res) => {
   const bank = await readQuestionBank();
   res.json(bank);
+});
+
+app.post("/api/tts", async (req, res) => {
+  const text = String(req.body?.text || "").trim();
+  const instructions = String(req.body?.instructions || "").trim();
+  const voice = String(req.body?.voice || "coral").trim();
+
+  if (!text) {
+    res.status(400).json({ message: "Text is required" });
+    return;
+  }
+
+  if (!process.env.OPENAI_API_KEY) {
+    res.status(501).json({ message: "TTS is not configured" });
+    return;
+  }
+
+  try {
+    const audioBuffer = await synthesizeSpeechWithOpenAI({
+      text,
+      instructions,
+      voice
+    });
+
+    res.setHeader("Content-Type", "audio/mpeg");
+    res.setHeader("Cache-Control", "no-store");
+    res.send(audioBuffer);
+  } catch (error) {
+    res.status(500).json({
+      message: error.message || "TTS failed"
+    });
+  }
 });
 
 app.post("/api/evaluate-speaking", upload.single("audio"), async (req, res) => {

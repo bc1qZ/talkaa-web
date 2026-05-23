@@ -457,7 +457,10 @@ const practiceSets = [...basePracticeSets, ...buildGeneratedPracticeSets()];
 const state = {
   screen: "home",
   homeTab: "home",
+  questionLibraryTab: "archive",
   questionPartFilter: "all",
+  questionCategoryFilter: "all",
+  questionSearch: "",
   reportRange: "all",
   reportMode: "speaking",
   reportEditMode: false,
@@ -476,6 +479,7 @@ const state = {
   audioChunks: [],
   audioBlob: null,
   audioUrl: "",
+  ttsAudio: null,
   lastResult: null,
   retryFromFeedback: false,
   trainingData: loadTrainingData()
@@ -583,22 +587,43 @@ function renderHomeScreen() {
 
 function renderHomeTabContent(dashboard, topErrors) {
   if (state.homeTab === "questions") {
+    const categories = getQuestionCategories();
+    const questionSets = getFilteredQuestionSets();
     return `
-      <div class="panel list-surface">
-        <div class="section-head">
-          <div>
-            <h3>全部真题</h3>
-            <p>按 Part 分类浏览，直接点进任意题目开始训练</p>
-          </div>
+      <div class="question-browser">
+        <div class="search-panel panel">
+          <span class="search-icon">⌕</span>
+          <input class="search-input" type="text" placeholder="搜索题目..." value="${escapeHtml(state.questionSearch)}" data-question-search="true" />
         </div>
-        <div class="filter-row">
-          <button class="filter-chip ${state.questionPartFilter === "all" ? "active" : ""}" type="button" data-part-filter="all">全部</button>
-          <button class="filter-chip ${state.questionPartFilter === "Part1" ? "active" : ""}" type="button" data-part-filter="Part1">Part 1</button>
-          <button class="filter-chip ${state.questionPartFilter === "Part2" ? "active" : ""}" type="button" data-part-filter="Part2">Part 2</button>
-          <button class="filter-chip ${state.questionPartFilter === "Part3" ? "active" : ""}" type="button" data-part-filter="Part3">Part 3</button>
+
+        <div class="question-top-tabs">
+          <button class="question-top-tab ${state.questionLibraryTab === "latest" ? "active" : ""}" type="button" data-question-library="latest">更新中</button>
+          <button class="question-top-tab ${state.questionLibraryTab === "reserved" ? "active" : ""}" type="button" data-question-library="reserved">保留题</button>
+          <button class="question-top-tab ${state.questionLibraryTab === "classic" ? "active" : ""}" type="button" data-question-library="classic">高频题</button>
+          <button class="question-top-tab ${state.questionLibraryTab === "overseas" ? "active" : ""}" type="button" data-question-library="overseas">海外题感</button>
+          <button class="question-top-tab ${state.questionLibraryTab === "archive" ? "active" : ""}" type="button" data-question-library="archive">往期真题</button>
         </div>
-        <div class="task-panel no-top">
-          ${renderTaskRows(state.questionPartFilter)}
+
+        <div class="question-part-tabs">
+          <button class="question-part-tab ${state.questionPartFilter === "all" ? "active" : ""}" type="button" data-part-filter="all">All</button>
+          <button class="question-part-tab ${state.questionPartFilter === "Part1" ? "active" : ""}" type="button" data-part-filter="Part1">Part 1</button>
+          <button class="question-part-tab ${state.questionPartFilter === "Part2" ? "active" : ""}" type="button" data-part-filter="Part2">Part 2</button>
+          <button class="question-part-tab ${state.questionPartFilter === "Part3" ? "active" : ""}" type="button" data-part-filter="Part3">Part 3</button>
+        </div>
+
+        <div class="question-category-tabs">
+          <button class="question-category-tab ${state.questionCategoryFilter === "all" ? "active" : ""}" type="button" data-question-category="all">全标签</button>
+          ${categories
+            .map(
+              (category) => `
+                <button class="question-category-tab ${state.questionCategoryFilter === category ? "active" : ""}" type="button" data-question-category="${escapeHtml(category)}">${category}</button>
+              `
+            )
+            .join("")}
+        </div>
+
+        <div class="question-grid">
+          ${questionSets.length ? questionSets.map((set) => renderQuestionCard(set)).join("") : `<div class="question-empty panel"><strong>没有找到匹配题目</strong><p>试试切换 Part、分类，或者换个关键词搜索。</p></div>`}
         </div>
       </div>
     `;
@@ -712,12 +737,6 @@ function renderReportOverviewScreen() {
           <button class="report-edit-btn" type="button" data-toggle-report-edit="true">${state.reportEditMode ? "完成" : "编辑"}</button>
         </div>
 
-        <div class="report-purpose panel">
-          <div class="report-purpose-kicker">这一页是干什么的</div>
-          <h2>看记录、看趋势、找今天最该练的点</h2>
-          <p>这里不是只看分数，而是帮你快速判断：最近有没有练、分数有没有上来、最弱维度是什么、下一步该练哪类题。</p>
-        </div>
-
         <div class="report-section-label">核心数据</div>
 
         <div class="report-stat-grid">
@@ -825,6 +844,22 @@ function renderReportHistoryCard(entry) {
   `;
 }
 
+function renderQuestionCard(set) {
+  const practiceCount = getPracticeCount(set.id);
+  const topicGroup = getQuestionTopicGroup(set);
+  return `
+    <button class="question-card panel" type="button" data-open-set="${set.id}">
+      <div class="question-card-top">
+        <span class="badge ${set.part.toLowerCase()}">${set.part.toUpperCase()}</span>
+        ${practiceCount > 0 ? `<span class="task-count-badge compact">练过 ${practiceCount}</span>` : ""}
+      </div>
+      <div class="question-card-zh">${set.titleZh}</div>
+      <div class="question-card-en">${set.titleEn}</div>
+      <div class="question-card-meta">${topicGroup} · ${set.category}</div>
+    </button>
+  `;
+}
+
 function renderTaskRows(partFilter = "all", limit = null) {
   const filteredSets = practiceSets.filter((set) => partFilter === "all" || set.part === partFilter);
   const finalSets = typeof limit === "number" ? filteredSets.slice(0, limit) : filteredSets;
@@ -848,6 +883,86 @@ function renderTaskRows(partFilter = "all", limit = null) {
       }
     )
     .join("");
+}
+
+function getFilteredQuestionSets() {
+  return practiceSets.filter((set) => {
+    if (!matchesQuestionLibraryTab(set)) {
+      return false;
+    }
+    if (state.questionPartFilter !== "all" && set.part !== state.questionPartFilter) {
+      return false;
+    }
+    if (state.questionCategoryFilter !== "all" && getQuestionTopicGroup(set) !== state.questionCategoryFilter) {
+      return false;
+    }
+    if (state.questionSearch.trim()) {
+      const key = state.questionSearch.trim().toLowerCase();
+      const haystack = `${set.titleEn} ${set.titleZh} ${set.category} ${getQuestionTopicGroup(set)}`.toLowerCase();
+      if (!haystack.includes(key)) {
+        return false;
+      }
+    }
+    return true;
+  });
+}
+
+function getQuestionCategories() {
+  const partFiltered = practiceSets.filter(
+    (set) =>
+      matchesQuestionLibraryTab(set) &&
+      (state.questionPartFilter === "all" || set.part === state.questionPartFilter)
+  );
+  return [...new Set(partFiltered.map((set) => getQuestionTopicGroup(set)))];
+}
+
+function getQuestionTopicGroup(set) {
+  const category = set.category;
+  const people = ["People"];
+  const places = ["Places", "Places & Architecture", "Home", "City Life", "Transport", "Travel", "Environment"];
+  const things = ["Technology", "Media", "Books & Media", "Food", "Health", "Communication"];
+  const events = ["Daily Life", "Learning", "Work & Study", "Work", "Life Choices"];
+
+  if (people.includes(category)) return "人物类";
+  if (places.includes(category)) return "地点类";
+  if (things.includes(category)) return "事物类";
+  if (events.includes(category)) return "事件/经历类";
+  return "观点/社会类";
+}
+
+function matchesQuestionLibraryTab(set) {
+  if (state.questionLibraryTab === "archive") {
+    return true;
+  }
+
+  const category = set.category;
+  const modernCategories = ["Technology", "Media", "Communication", "City Life", "Environment"];
+  const reservedCategories = ["People", "Learning", "Work & Study", "Travel", "Places", "Places & Architecture"];
+  const classicCategories = ["Daily Life", "Home", "Transport", "Food", "Health", "Books & Media"];
+  const overseasCategories = ["Society", "Culture", "Education", "Work", "Life Choices"];
+
+  if (state.questionLibraryTab === "latest") {
+    return modernCategories.includes(category);
+  }
+  if (state.questionLibraryTab === "reserved") {
+    return reservedCategories.includes(category) || set.part === "Part2";
+  }
+  if (state.questionLibraryTab === "classic") {
+    return classicCategories.includes(category) || set.part === "Part1";
+  }
+  if (state.questionLibraryTab === "overseas") {
+    return overseasCategories.includes(category) || set.part === "Part3";
+  }
+
+  return true;
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
 }
 
 function renderWeaknessRows(topErrors) {
@@ -1268,6 +1383,28 @@ function bindEvents() {
   document.querySelectorAll("[data-part-filter]").forEach((button) => {
     button.addEventListener("click", () => {
       state.questionPartFilter = button.dataset.partFilter;
+      state.questionCategoryFilter = "all";
+      render();
+    });
+  });
+
+  document.querySelectorAll("[data-question-category]").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.questionCategoryFilter = button.dataset.questionCategory;
+      render();
+    });
+  });
+
+  document.querySelectorAll("[data-question-library]").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.questionLibraryTab = button.dataset.questionLibrary;
+      render();
+    });
+  });
+
+  document.querySelectorAll("[data-question-search]").forEach((input) => {
+    input.addEventListener("input", (event) => {
+      state.questionSearch = event.target.value;
       render();
     });
   });
@@ -1708,7 +1845,16 @@ function copyPolishedAnswer() {
   alert(text);
 }
 
-function speakText(text, lang = "en-US") {
+async function speakText(text, lang = "en-US", instructions = "") {
+  try {
+    await speakWithServerTTS(text, instructions || buildTtsInstructions(lang));
+    return;
+  } catch (_error) {
+    speakWithBrowserTTS(text, lang);
+  }
+}
+
+function speakWithBrowserTTS(text, lang = "en-US") {
   if (!window.speechSynthesis) {
     alert(text);
     return;
@@ -1718,6 +1864,52 @@ function speakText(text, lang = "en-US") {
   utterance.rate = 0.92;
   window.speechSynthesis.cancel();
   window.speechSynthesis.speak(utterance);
+}
+
+async function speakWithServerTTS(text, instructions) {
+  if (!window.location.protocol.startsWith("http")) {
+    throw new Error("Server TTS unavailable");
+  }
+
+  if (state.ttsAudio) {
+    state.ttsAudio.pause();
+    state.ttsAudio = null;
+  }
+
+  const response = await fetch("/api/tts", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      text,
+      instructions,
+      voice: "coral"
+    })
+  });
+
+  if (!response.ok) {
+    throw new Error("TTS failed");
+  }
+
+  const blob = await response.blob();
+  const audioUrl = URL.createObjectURL(blob);
+  const audio = new Audio(audioUrl);
+  state.ttsAudio = audio;
+  audio.onended = () => {
+    URL.revokeObjectURL(audioUrl);
+    if (state.ttsAudio === audio) {
+      state.ttsAudio = null;
+    }
+  };
+  await audio.play();
+}
+
+function buildTtsInstructions(lang) {
+  if (lang.startsWith("en")) {
+    return "Speak naturally like a calm IELTS speaking coach. Use clear pacing, light emphasis, and warm but realistic intonation.";
+  }
+  return "Speak clearly, naturally, and at a moderate pace.";
 }
 
 function updatePracticeLiveUI() {

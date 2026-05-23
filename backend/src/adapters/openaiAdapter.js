@@ -78,6 +78,33 @@ export async function evaluateWithOpenAI({ audioPath, set, question, transcriptH
   };
 }
 
+export async function synthesizeSpeechWithOpenAI({ text, instructions = "", voice = "coral" }) {
+  const apiKey = requireEnv("OPENAI_API_KEY");
+  const model = process.env.OPENAI_TTS_MODEL || "gpt-4o-mini-tts";
+
+  const speechRes = await fetch("https://api.openai.com/v1/audio/speech", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${apiKey}`
+    },
+    body: JSON.stringify({
+      model,
+      voice,
+      input: text,
+      instructions,
+      response_format: "mp3"
+    })
+  });
+
+  if (!speechRes.ok) {
+    throw new Error(`Speech generation failed with status ${speechRes.status}`);
+  }
+
+  const arrayBuffer = await speechRes.arrayBuffer();
+  return Buffer.from(arrayBuffer);
+}
+
 function buildTranscriptionFormData(audioBuffer, audioPath, model, transcriptHint) {
   const form = new FormData();
   const fileName = audioPath.split("/").pop() || "answer.mp3";
