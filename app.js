@@ -565,6 +565,7 @@ function renderHomeTabContent(dashboard, topErrors) {
 
 function renderReportOverviewScreen() {
   const overview = getReportOverview();
+  const dashboard = getDashboardSummary();
   const entries = getFilteredHistoryEntries();
   const modeLabel = state.reportMode === "speaking" ? "口语真题" : "模考评分";
 
@@ -577,12 +578,35 @@ function renderReportOverviewScreen() {
           <button class="report-edit-btn" type="button" data-toggle-report-edit="true">${state.reportEditMode ? "完成" : "编辑"}</button>
         </div>
 
+        <div class="report-purpose panel">
+          <div class="report-purpose-kicker">这一页是干什么的</div>
+          <h2>看记录、看趋势、找今天最该练的点</h2>
+          <p>这里不是只看分数，而是帮你快速判断：最近有没有练、分数有没有上来、最弱维度是什么、下一步该练哪类题。</p>
+        </div>
+
+        <div class="report-section-label">核心数据</div>
+
         <div class="report-stat-grid">
           ${renderReportStatCard("★", overview.bestScore, "最高得分", "gold")}
           ${renderReportStatCard("◔", `${overview.todayMinutes} 分钟`, "今日练习", "slate")}
           ${renderReportStatCard("◉", `${overview.streak} 天`, "坚持天数", "orange")}
           ${renderReportStatCard("▮▮▮", `${overview.totalHours} 小时`, "累计练习", "green")}
         </div>
+
+        <div class="report-focus-grid">
+          <div class="report-focus-card panel">
+            <span class="report-focus-label">当前最弱维度</span>
+            <strong>${dashboard.weakestDimension}</strong>
+            <p>今天优先修这个，比平均发力更有效。</p>
+          </div>
+          <div class="report-focus-card panel">
+            <span class="report-focus-label">近 7 次均分</span>
+            <strong>${dashboard.averageBand}</strong>
+            <p>先把近 7 次均分稳定拉高，比追单次高分更有意义。</p>
+          </div>
+        </div>
+
+        <div class="report-section-label">怎么筛选</div>
 
         <div class="report-range-tabs">
           <button class="filter-chip ${state.reportRange === "all" ? "active" : ""}" type="button" data-report-range="all">全部</button>
@@ -595,6 +619,8 @@ function renderReportOverviewScreen() {
           <button class="report-mode-btn ${state.reportMode === "speaking" ? "active" : ""}" type="button" data-report-mode="speaking">口语真题</button>
           <button class="report-mode-btn ${state.reportMode === "mock" ? "active" : ""}" type="button" data-report-mode="mock">模考评分</button>
         </div>
+
+        <div class="report-section-label">练习记录</div>
 
         <div class="report-history-list">
           ${
