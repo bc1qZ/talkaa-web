@@ -160,6 +160,7 @@ const practiceSets = [
 
 const state = {
   screen: "home",
+  homeTab: "home",
   currentSetId: practiceSets[0].id,
   currentQuestionIndex: 0,
   selectedVoice: "Eric",
@@ -180,6 +181,25 @@ const state = {
   trainingData: loadTrainingData()
 };
 
+const motivationQuotes = [
+  {
+    title: "Small steps build big scores.",
+    subtitle: "每天一点点，7.5 会慢慢靠近你。"
+  },
+  {
+    title: "Speak better today than yesterday.",
+    subtitle: "今天比昨天更顺一点，就已经在进步。"
+  },
+  {
+    title: "Consistency beats intensity.",
+    subtitle: "稳定练习，比偶尔拼命更有效。"
+  },
+  {
+    title: "One clearer answer at a time.",
+    subtitle: "一题一题讲清楚，分数自然会上来。"
+  }
+];
+
 const app = document.querySelector("#app");
 
 function getCurrentSet() {
@@ -189,6 +209,11 @@ function getCurrentSet() {
 function getCurrentQuestion() {
   const set = getCurrentSet();
   return set.questions[state.currentQuestionIndex] || set.questions[0];
+}
+
+function getMotivationQuote() {
+  const day = new Date().getDate();
+  return motivationQuotes[day % motivationQuotes.length];
 }
 
 function render() {
@@ -205,25 +230,18 @@ function render() {
 function renderHomeScreen() {
   const dashboard = getDashboardSummary();
   const topErrors = getTopErrors();
-  const feed = [
-    {
-      title: "Talkaa：5-8月雅思口语新题",
-      desc: "Part 1 一次补 13 道小问，帮助你按月份刷新题。"
-    },
-    {
-      title: "Talkaa：5月新题再加更",
-      desc: "集中入库的一批新话题，可以用来做晨练和晚练。"
-    }
-  ];
+  const quote = getMotivationQuote();
 
   return `
     <section class="screen ${state.screen === "home" ? "active" : ""}" data-screen="home">
-      <div class="status-bar">
-        <span>09:33 ◐</span>
-        <span>5G 60</span>
+      <div class="page-top">
+        <div>
+          <div class="calendar-title">2026 年 5 月</div>
+          <div class="page-kicker">Daily speaking training</div>
+        </div>
+        <button class="pill-dark" type="button">7.5 养成</button>
       </div>
-      <div class="calendar-strip">
-        <div class="calendar-title">2026 年 5 月</div>
+      <div class="calendar-strip compact">
         <div class="week-grid">
           <span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
         </div>
@@ -239,121 +257,201 @@ function renderHomeScreen() {
       </div>
       <div class="hero-row">
         <div>
-          <h1 class="hero-title">早上好! <span class="gift">🎁</span></h1>
+          <h1 class="hero-title">${quote.title}</h1>
+          <div class="hero-subtitle">${quote.subtitle}</div>
           <div class="muted">今日 ${dashboard.todayCount}/${dashboard.dailyTarget} 次日常训练</div>
         </div>
         <div class="hero-actions">
           <button class="circle-btn" type="button" data-reset-day="true">↺</button>
-          <button class="premium-btn" type="button">7.5 养成</button>
         </div>
       </div>
-      <div class="coach-grid">
-        <div class="coach-card panel">
-          <div class="coach-label">今日节奏</div>
-          <div class="coach-value">${dashboard.todayPlanTitle}</div>
-          <p>${dashboard.todayPlanBody}</p>
-        </div>
-        <div class="coach-card panel">
-          <div class="coach-label">最近 7 次均分</div>
-          <div class="coach-value">${dashboard.averageBand}</div>
-          <p>当前最弱维度是 ${dashboard.weakestDimension}，今天优先改它。</p>
-        </div>
-      </div>
-      <div class="habit-card panel">
-        <div class="habit-top">
-          <div>
-            <strong>日常养成面板</strong>
-            <div class="muted">目标是稳定冲到 7.5，而不是只看一次分数</div>
-          </div>
-          <span class="habit-streak">${dashboard.streak} 天</span>
-        </div>
-        <div class="habit-metrics">
-          <div><span>${dashboard.totalSessions}</span><label>累计练习</label></div>
-          <div><span>${dashboard.retries}</span><label>二次重答</label></div>
-          <div><span>${dashboard.targetGap}</span><label>距 7.5</label></div>
-        </div>
-      </div>
-      <div class="task-panel panel">
-        ${practiceSets
-          .map(
-            (set) => `
-            <button class="task-row" type="button" data-open-set="${set.id}">
-              <span class="radio ${set.status === "done" ? "done" : ""}"></span>
-              <span class="task-copy">
-                <span class="badge ${set.part.toLowerCase()}">${set.part}</span>
-                <div class="task-title ${set.status === "done" ? "done" : ""}">${set.titleEn}</div>
-                <div class="task-subtitle">${set.titleZh}</div>
-              </span>
-              <span class="chev">›</span>
-            </button>
-          `
-          )
-          .join("")}
-      </div>
-      <div class="feature-grid">
-        <button class="feature-card" type="button" data-jump="detail">
-          <div>🎙️</div>
-          <strong>日常训练</strong>
-          <span>Daily Drill</span>
-        </button>
-        <button class="feature-card" type="button" data-jump="practice">
-          <div>⏰</div>
-          <strong>立即重答</strong>
-          <span>Retry Now</span>
-        </button>
-        <button class="feature-card" type="button" data-jump="report">
-          <div>📖</div>
-          <strong>弱点报告</strong>
-          <span>My Gaps</span>
-        </button>
-      </div>
-      <div class="section-title">
-        <span class="accent-bar"></span>
-        <span>最近反复出现的问题</span>
-      </div>
-      <div class="panel weakness-panel">
-        ${
-          topErrors.length
-            ? topErrors
-                .map(
-                  (item) => `
-                    <div class="weakness-row">
-                      <strong>${item.name}</strong>
-                      <span>${item.count} 次</span>
-                    </div>
-                  `
-                )
-                .join("")
-            : `<p class="muted">还没有累计错误记录。先完成 2 到 3 次训练，系统会开始形成你的个人错误本。</p>`
-        }
-      </div>
-      <div class="section-title">
-        <span class="accent-bar"></span>
-        <span>Talkaa 的朋友圈</span>
-      </div>
-      ${feed
-        .map(
-          (item) => `
-          <div class="feed-card panel">
-            <div class="feed-image">NEW<br />QUESTIONS</div>
-            <div>
-              <h4>${item.title}</h4>
-              <p>${item.desc}</p>
-            </div>
-            <div class="chev">›</div>
-          </div>
-        `
-        )
-        .join("")}
+      ${renderHomeTabContent(dashboard, topErrors)}
       <div class="nav-bar">
-        <button class="nav-item active" type="button">首页</button>
-        <button class="nav-item" type="button">真题</button>
-        <button class="nav-item" type="button">定制</button>
-        <button class="nav-item" type="button">报告</button>
-        <button class="nav-item" type="button">我的</button>
+        <button class="nav-item ${state.homeTab === "home" ? "active" : ""}" type="button" data-home-tab="home">首页</button>
+        <button class="nav-item ${state.homeTab === "questions" ? "active" : ""}" type="button" data-home-tab="questions">真题</button>
+        <button class="nav-item ${state.homeTab === "custom" ? "active" : ""}" type="button" data-home-tab="custom">定制</button>
+        <button class="nav-item ${state.homeTab === "report" ? "active" : ""}" type="button" data-home-tab="report">报告</button>
+        <button class="nav-item ${state.homeTab === "me" ? "active" : ""}" type="button" data-home-tab="me">我的</button>
       </div>
     </section>
   `;
+}
+
+function renderHomeTabContent(dashboard, topErrors) {
+  if (state.homeTab === "questions") {
+    return `
+      <div class="panel list-surface">
+        <div class="section-head">
+          <div>
+            <h3>全部真题</h3>
+            <p>直接点进任意题目开始训练</p>
+          </div>
+        </div>
+        <div class="task-panel no-top">
+          ${renderTaskRows()}
+        </div>
+      </div>
+    `;
+  }
+
+  if (state.homeTab === "custom") {
+    return `
+      <div class="panel list-surface">
+        <div class="section-head">
+          <div>
+            <h3>定制训练</h3>
+            <p>按你的 7.5 目标给练习重点排优先级</p>
+          </div>
+        </div>
+        <div class="coach-grid">
+          <div class="coach-card soft-card">
+            <div class="coach-label">今日优先</div>
+            <div class="coach-value">${dashboard.weakestDimension}</div>
+            <p>先把最弱的 1 个维度拉起来，比分散练更有效。</p>
+          </div>
+          <div class="coach-card soft-card">
+            <div class="coach-label">听力/跟读</div>
+            <div class="coach-value">可接 TTS</div>
+            <p>你后面可以接入更自然的 TTS，把浏览器默认朗读替换掉。</p>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  if (state.homeTab === "report") {
+    return `
+      <div class="panel list-surface">
+        <div class="section-head">
+          <div>
+            <h3>训练报告</h3>
+            <p>先看趋势，再决定今天练哪一题</p>
+          </div>
+        </div>
+        <div class="habit-card panel inner-panel">
+          <div class="habit-top">
+            <div>
+              <strong>近 7 次表现</strong>
+              <div class="muted">目标是稳步接近 7.5</div>
+            </div>
+          </div>
+          <div class="habit-metrics">
+            <div><span>${dashboard.averageBand}</span><label>近 7 次均分</label></div>
+            <div><span>${dashboard.retries}</span><label>二次重答</label></div>
+            <div><span>${dashboard.targetGap}</span><label>距 7.5</label></div>
+          </div>
+        </div>
+        <div class="section-title compact-title">
+          <span class="accent-bar"></span>
+          <span>最近反复出现的问题</span>
+        </div>
+        <div class="panel weakness-panel">
+          ${renderWeaknessRows(topErrors)}
+        </div>
+      </div>
+    `;
+  }
+
+  if (state.homeTab === "me") {
+    return `
+      <div class="panel list-surface">
+        <div class="section-head">
+          <div>
+            <h3>我的训练</h3>
+            <p>保持节奏，比偶尔高强度更重要</p>
+          </div>
+        </div>
+        <div class="habit-card panel inner-panel">
+          <div class="habit-top">
+            <div>
+              <strong>连续练习</strong>
+              <div class="muted">把练习做成习惯</div>
+            </div>
+            <span class="habit-streak">${dashboard.streak} 天</span>
+          </div>
+          <div class="habit-metrics">
+            <div><span>${dashboard.totalSessions}</span><label>累计练习</label></div>
+            <div><span>${dashboard.todayCount}</span><label>今日已练</label></div>
+            <div><span>${dashboard.dailyTarget}</span><label>日目标</label></div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  return `
+    <div class="coach-grid">
+      <div class="coach-card soft-card">
+        <div class="coach-label">今日节奏</div>
+        <div class="coach-value">${dashboard.todayPlanTitle}</div>
+        <p>${dashboard.todayPlanBody}</p>
+      </div>
+      <div class="coach-card soft-card">
+        <div class="coach-label">最近 7 次均分</div>
+        <div class="coach-value">${dashboard.averageBand}</div>
+        <p>当前最弱维度是 ${dashboard.weakestDimension}，今天优先改它。</p>
+      </div>
+    </div>
+    <div class="habit-card panel">
+      <div class="habit-top">
+        <div>
+          <strong>日常养成面板</strong>
+          <div class="muted">目标是稳定冲到 7.5，而不是只看一次分数</div>
+        </div>
+        <span class="habit-streak">${dashboard.streak} 天</span>
+      </div>
+      <div class="habit-metrics">
+        <div><span>${dashboard.totalSessions}</span><label>累计练习</label></div>
+        <div><span>${dashboard.retries}</span><label>二次重答</label></div>
+        <div><span>${dashboard.targetGap}</span><label>距 7.5</label></div>
+      </div>
+    </div>
+    <div class="panel list-surface">
+      <div class="section-head">
+        <div>
+          <h3>今日推荐真题</h3>
+          <p>直接从这里点进任意题目开始练</p>
+        </div>
+      </div>
+      <div class="task-panel no-top">
+        ${renderTaskRows()}
+      </div>
+    </div>
+  `;
+}
+
+function renderTaskRows() {
+  return practiceSets
+    .map(
+      (set) => `
+        <button class="task-row clean-task-row" type="button" data-open-set="${set.id}">
+          <span class="radio ${set.status === "done" ? "done" : ""}"></span>
+          <span class="task-copy">
+            <span class="badge ${set.part.toLowerCase()}">${set.part}</span>
+            <div class="task-title ${set.status === "done" ? "done" : ""}">${set.titleEn}</div>
+            <div class="task-subtitle">${set.titleZh}</div>
+          </span>
+          <span class="chev">›</span>
+        </button>
+      `
+    )
+    .join("");
+}
+
+function renderWeaknessRows(topErrors) {
+  if (!topErrors.length) {
+    return `<p class="muted">还没有累计错误记录。先完成 2 到 3 次训练，系统会开始形成你的个人错误本。</p>`;
+  }
+  return topErrors
+    .map(
+      (item) => `
+        <div class="weakness-row">
+          <strong>${item.name}</strong>
+          <span>${item.count} 次</span>
+        </div>
+      `
+    )
+    .join("");
 }
 
 function renderDetailScreen() {
@@ -363,9 +461,9 @@ function renderDetailScreen() {
 
   return `
     <section class="screen ${state.screen === "detail" ? "active" : ""}" data-screen="detail">
-      <div class="status-bar">
+      <div class="page-header">
         <button class="back-btn" type="button" data-back="home">‹ 返回</button>
-        <span></span>
+        <span class="header-label">真题详情</span>
       </div>
       <div class="detail-header">
         <div>
@@ -422,7 +520,7 @@ function renderPracticeScreen() {
 
   return `
     <section class="screen ${state.screen === "practice" ? "active" : ""}" data-screen="practice">
-      <div class="status-bar">
+      <div class="page-header">
         <button class="back-btn" type="button" data-back="detail">‹ 返回</button>
         <strong>${getCurrentSet().part}</strong>
         <button class="ghost-btn" type="button" data-voice="true">🔊 ${state.selectedVoice}</button>
@@ -444,10 +542,10 @@ function renderPracticeScreen() {
       ${
         state.transcript
           ? `
-            <div class="chat-bubble">
+            <div class="chat-bubble" data-live-wrap="true">
               <div class="answer-card">
-                <h3>${state.transcript}</h3>
-                <div>${state.recordedSeconds}"</div>
+                <h3 data-live-transcript>${state.transcript}</h3>
+                <div data-live-seconds>${state.recordedSeconds}"</div>
               </div>
             </div>
           `
@@ -455,12 +553,12 @@ function renderPracticeScreen() {
       }
       <div class="record-panel">
         <div class="record-track">
-          <div class="record-fill" style="width:${recordProgress}%"></div>
+          <div class="record-fill" data-record-fill style="width:${recordProgress}%"></div>
         </div>
         <div class="timer-panel">
           <div class="timer-label">剩余时间</div>
-          <div class="timer-value">${minutes}:${seconds}</div>
-          <div class="timer-sub">已录制 ${recorded}</div>
+          <div class="timer-value" data-timer-value>${minutes}:${seconds}</div>
+          <div class="timer-sub" data-timer-sub>已录制 ${recorded}</div>
         </div>
         <div class="record-actions">
           <button class="outline-btn" type="button" data-cancel-record="true">取消</button>
@@ -481,7 +579,7 @@ function renderFeedbackScreen() {
 
   return `
     <section class="screen ${state.screen === "feedback" ? "active" : ""}" data-screen="feedback">
-      <div class="status-bar">
+      <div class="page-header">
         <button class="back-btn" type="button" data-back="practice">‹ 返回</button>
         <strong>${set.part}</strong>
         <button class="ghost-btn" type="button" data-voice="true">🔊 ${state.selectedVoice}</button>
@@ -559,7 +657,7 @@ function renderReportScreen() {
 
   return `
     <section class="screen ${state.screen === "report" ? "active" : ""}" data-screen="report">
-      <div class="status-bar">
+      <div class="page-header">
         <button class="back-btn" type="button" data-back="feedback">‹ 返回</button>
         <span></span>
         <button class="ghost-btn" type="button" data-close-report="true">✕</button>
@@ -697,6 +795,14 @@ function bindEvents() {
         return;
       }
       switchScreen(target);
+    });
+  });
+
+  document.querySelectorAll("[data-home-tab]").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.homeTab = button.dataset.homeTab;
+      state.screen = "home";
+      render();
     });
   });
 
@@ -839,13 +945,13 @@ async function startRecording() {
         transcript += `${event.results[i][0].transcript} `;
       }
       state.transcript = transcript.trim();
-      render();
+      updatePracticeLiveUI();
     };
     recognition.onerror = () => {
       if (!state.transcript) {
         state.transcript = "语音识别暂时没有拿到文字，你也可以直接发送录音试试。";
       }
-      render();
+      updatePracticeLiveUI();
     };
     recognition.start();
     state.speechRecognition = recognition;
@@ -874,11 +980,11 @@ async function startRecording() {
       if (!state.transcript) {
         state.transcript = "浏览器拒绝了麦克风权限，可以允许麦克风后再试。";
       }
-      render();
+      updatePracticeLiveUI();
     }
   } else if (!state.transcript) {
     state.transcript = "当前浏览器不支持录音，但页面结构和练习流程可以正常体验。";
-    render();
+    updatePracticeLiveUI();
   }
 }
 
@@ -892,7 +998,7 @@ function startTimer() {
     if (state.timerLeft > 0) {
       state.timerLeft -= 1;
       state.recordedSeconds += 1;
-      render();
+      updatePracticeLiveUI();
       return;
     }
     finishAnswer();
@@ -1109,6 +1215,50 @@ function speakText(text, lang = "en-US") {
   utterance.rate = 0.92;
   window.speechSynthesis.cancel();
   window.speechSynthesis.speak(utterance);
+}
+
+function updatePracticeLiveUI() {
+  if (state.screen !== "practice") {
+    return;
+  }
+
+  const timerValue = document.querySelector("[data-timer-value]");
+  const timerSub = document.querySelector("[data-timer-sub]");
+  const recordFill = document.querySelector("[data-record-fill]");
+  const bubbleTitle = document.querySelector("[data-live-transcript]");
+  const bubbleSeconds = document.querySelector("[data-live-seconds]");
+  const bubbleWrap = document.querySelector("[data-live-wrap]");
+
+  const minutes = String(Math.floor(state.timerLeft / 60)).padStart(2, "0");
+  const seconds = String(state.timerLeft % 60).padStart(2, "0");
+  const recorded = `00:${String(state.recordedSeconds).padStart(2, "0")}`;
+  const recordProgress = ((state.timerTotal - state.timerLeft) / state.timerTotal) * 100;
+
+  if (timerValue) timerValue.textContent = `${minutes}:${seconds}`;
+  if (timerSub) timerSub.textContent = `已录制 ${recorded}`;
+  if (recordFill) recordFill.style.width = `${recordProgress}%`;
+
+  if (state.transcript) {
+    if (!bubbleWrap) {
+      const promptCard = document.querySelector('[data-screen="practice"] .prompt-card');
+      if (promptCard) {
+        const wrap = document.createElement("div");
+        wrap.className = "chat-bubble";
+        wrap.setAttribute("data-live-wrap", "true");
+        wrap.innerHTML = `
+          <div class="answer-card">
+            <h3 data-live-transcript></h3>
+            <div data-live-seconds></div>
+          </div>
+        `;
+        promptCard.insertAdjacentElement("afterend", wrap);
+      }
+    }
+    const latestTitle = document.querySelector("[data-live-transcript]");
+    const latestSeconds = document.querySelector("[data-live-seconds]");
+    if (latestTitle) latestTitle.textContent = state.transcript;
+    if (latestSeconds) latestSeconds.textContent = `${state.recordedSeconds}"`;
+  }
 }
 
 function canUseRemoteEvaluation() {

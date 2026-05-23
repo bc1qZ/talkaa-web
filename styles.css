@@ -66,13 +66,11 @@ button {
   display: block;
 }
 
-.status-bar,
 .top-row,
 .hero-row,
 .section-title,
 .task-row,
 .qa-card,
-.result-card,
 .pill-row,
 .metric-row,
 .chat-bubble,
@@ -87,7 +85,6 @@ button {
   display: flex;
 }
 
-.status-bar,
 .top-row,
 .hero-row,
 .section-title,
@@ -99,19 +96,48 @@ button {
   justify-content: space-between;
 }
 
-.status-bar {
-  padding: 12px 4px 22px;
-  font-weight: 700;
-  font-size: 16px;
+.muted {
+  color: var(--muted);
 }
 
-.muted {
+.page-top,
+.page-header,
+.section-head {
+  display: flex;
+}
+
+.page-top,
+.page-header,
+.section-head {
+  align-items: center;
+  justify-content: space-between;
+}
+
+.page-top {
+  padding-top: 10px;
+}
+
+.page-kicker {
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+.page-header {
+  padding: 8px 0 20px;
+}
+
+.header-label {
   color: var(--muted);
 }
 
 .calendar-strip {
   margin-top: 4px;
   padding: 10px 0 22px;
+}
+
+.calendar-strip.compact {
+  padding-top: 12px;
+  padding-bottom: 18px;
 }
 
 .calendar-title {
@@ -150,12 +176,18 @@ button {
 
 .hero-title {
   margin: 0;
-  font-size: 30px;
-  line-height: 1.1;
+  font-size: 32px;
+  line-height: 1.18;
+  max-width: 270px;
 }
 
 .gift {
   color: var(--red);
+}
+
+.hero-subtitle {
+  color: var(--muted);
+  margin: 10px 0 8px;
 }
 
 .hero-actions {
@@ -165,6 +197,7 @@ button {
 
 .circle-btn,
 .premium-btn,
+.pill-dark,
 .ghost-btn,
 .outline-btn,
 .primary-btn,
@@ -194,6 +227,14 @@ button {
   box-shadow: var(--shadow);
 }
 
+.pill-dark {
+  border-radius: 999px;
+  padding: 12px 20px;
+  background: #252321;
+  color: #fff;
+  font-weight: 700;
+}
+
 .panel {
   background: var(--panel);
   border: 1px solid rgba(80, 66, 48, 0.08);
@@ -206,10 +247,16 @@ button {
   padding: 16px;
 }
 
+.task-panel.no-top {
+  margin-top: 0;
+}
+
 .task-row {
   gap: 12px;
   padding: 14px 0;
   border-bottom: 1px dashed var(--line);
+  width: 100%;
+  text-align: left;
 }
 
 .task-row:last-child {
@@ -419,6 +466,31 @@ button {
   text-align: center;
 }
 
+.soft-card,
+.inner-panel,
+.list-surface {
+  background: rgba(255, 253, 249, 0.96);
+}
+
+.list-surface {
+  margin-top: 18px;
+  padding: 18px;
+}
+
+.section-head h3,
+.section-head p {
+  margin: 0;
+}
+
+.section-head h3 {
+  font-size: 22px;
+  margin-bottom: 6px;
+}
+
+.section-head p {
+  color: var(--muted);
+}
+
 .feature-card strong {
   display: block;
   font-size: 15px;
@@ -438,47 +510,15 @@ button {
   font-weight: 800;
 }
 
+.compact-title {
+  margin-top: 20px;
+}
+
 .accent-bar {
   width: 8px;
   height: 28px;
   border-radius: 999px;
   background: linear-gradient(180deg, #9876aa, #c7b0d3);
-}
-
-.feed-card {
-  display: grid;
-  grid-template-columns: 84px 1fr 28px;
-  gap: 14px;
-  padding: 14px;
-  margin-bottom: 14px;
-  border: 1.5px dashed #ddd2c3;
-}
-
-.feed-image {
-  border-radius: 18px;
-  background: linear-gradient(135deg, #f4fffa, #fff4ec);
-  color: #307e7e;
-  font-weight: 800;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 10px;
-}
-
-.feed-card h4,
-.feed-card p {
-  margin: 0;
-}
-
-.feed-card h4 {
-  font-size: 17px;
-  margin-bottom: 10px;
-}
-
-.feed-card p {
-  color: var(--muted);
-  line-height: 1.45;
 }
 
 .nav-bar {
@@ -492,6 +532,7 @@ button {
   border: 1px solid rgba(80, 66, 48, 0.08);
   box-shadow: var(--shadow);
   backdrop-filter: blur(12px);
+  z-index: 20;
 }
 
 .nav-item {
@@ -515,7 +556,7 @@ button {
 }
 
 .detail-title {
-  margin: 46px 0 6px;
+  margin: 24px 0 6px;
   font-size: 32px;
   font-weight: 800;
 }
@@ -604,7 +645,7 @@ button {
 .practice-progress {
   align-items: center;
   gap: 12px;
-  margin: 18px 0 26px;
+  margin: 8px 0 22px;
 }
 
 .progress-track,
@@ -626,7 +667,6 @@ button {
 .prompt-card,
 .answer-card,
 .result-card,
-.analysis-card,
 .suggestion-card {
   padding: 22px;
 }
@@ -653,7 +693,7 @@ button {
 }
 
 .record-panel {
-  margin-top: 160px;
+  margin-top: 72px;
 }
 
 .coach-strip {
@@ -736,6 +776,7 @@ button {
 .analysis-card {
   background: transparent;
   padding: 6px 4px 0;
+  display: block;
 }
 
 .analysis-card h4,
@@ -771,6 +812,7 @@ button {
 
 .analysis-item {
   margin-bottom: 16px;
+  display: block;
 }
 
 .analysis-item strong {
@@ -784,6 +826,7 @@ button {
 .result-summary {
   margin: 0;
   line-height: 1.65;
+  display: block;
 }
 
 .bottom-row {
@@ -847,6 +890,7 @@ button {
 }
 
 .result-card {
+  display: block;
   border: 2px solid rgba(166, 123, 11, 0.35);
 }
 
@@ -908,6 +952,7 @@ button {
 .suggestion-card {
   margin-top: 18px;
   border: 1px dashed #ddd1bf;
+  display: block;
 }
 
 .suggestion-header {
@@ -921,7 +966,7 @@ button {
 
 .rewrite {
   display: grid;
-  grid-template-columns: 1fr 28px 1fr;
+  grid-template-columns: minmax(0, 1fr) 28px minmax(0, 1fr);
   gap: 12px;
   align-items: center;
   margin: 12px 0 10px;
@@ -955,6 +1000,8 @@ button {
   background: #fffdfa;
   line-height: 1.75;
   font-size: 17px;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .answer-tools {
@@ -1001,14 +1048,14 @@ button {
   }
 
   .feature-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 
   .coach-grid,
   .micro-grid,
   .metric-grid,
   .mini-score-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
 
   .habit-metrics,
@@ -1017,6 +1064,11 @@ button {
   }
 
   .answer-card {
+    max-width: 100%;
+  }
+
+  .hero-title {
+    font-size: 28px;
     max-width: 100%;
   }
 }
